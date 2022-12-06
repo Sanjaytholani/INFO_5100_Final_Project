@@ -16,7 +16,7 @@ public class HospitalFrame extends javax.swing.JFrame {
     public HospitalFrame() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,6 +220,10 @@ public class HospitalFrame extends javax.swing.JFrame {
                 new HospitalFrame().setVisible(true);
             }
         });
+    }
+    public void setValues(String username,String role){
+        jLabel3.setText(username);
+        jLabel4.setText(role);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
