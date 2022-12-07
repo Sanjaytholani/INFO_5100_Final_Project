@@ -217,7 +217,7 @@ public class CreatePatient extends javax.swing.JFrame {
             new HospitalFrame().setVisible(true);
         }
         else{
-            
+            new ReceptionistFrame().setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

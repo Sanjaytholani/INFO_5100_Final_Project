@@ -17,6 +17,7 @@ public class ViewPatinet extends javax.swing.JFrame {
     /**
      * Creates new form ViewPatinet
      */
+    String role;
     public ViewPatinet() {
         initComponents();
         try{
@@ -281,8 +282,12 @@ public class ViewPatinet extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new HospitalFrame().setVisible(true);
+        if(this.role=="Admin"){
+            new HospitalFrame().setVisible(true);
+        }
+        else{
+            new ReceptionistFrame().setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -326,6 +331,9 @@ public class ViewPatinet extends javax.swing.JFrame {
                 new ViewPatinet().setVisible(true);
             }
         });
+    }
+    public void setRole(String role){
+        this.role=role;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

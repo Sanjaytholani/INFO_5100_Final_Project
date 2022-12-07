@@ -191,12 +191,13 @@ public class LoginFrame extends javax.swing.JFrame {
 //                setVisible(false);
 //                p.show();
 //            
-//            }else if("HospitalAdmin".equals(role) && resultset.next()){
-//                HospitalAdmin ha = new HospitalAdmin();
-//                setVisible(false);
-//                ha.show();
-//
 //            }
+            else if("Receptionist".equals(role) && resultset.next()){
+                ReceptionistFrame ha = new ReceptionistFrame();
+                setVisible(false);
+                ha.setVisible(true);
+
+            }
             else if("Admin".equals(role) && resultset.next()){
 //                communityAdmin ca = new communityAdmin();
                 setVisible(false);

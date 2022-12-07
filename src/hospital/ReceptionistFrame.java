@@ -159,6 +159,10 @@ public class ReceptionistFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        ViewPatinet viewPatient=new ViewPatinet();
+        viewPatient.setRole("Receptionist");
+        viewPatient.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -180,7 +184,7 @@ public class ReceptionistFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         CreatePatient createPatient=new CreatePatient();
-        createPatient.setRole("Admin");
+        createPatient.setRole("Receptionist");
         createPatient.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -217,6 +221,10 @@ public class ReceptionistFrame extends javax.swing.JFrame {
                 new ReceptionistFrame().setVisible(true);
             }
         });
+    }
+    public void setValues(String username,String role){
+        jLabel3.setText(username);
+        jLabel4.setText(role);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
