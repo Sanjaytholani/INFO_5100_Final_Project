@@ -199,9 +199,9 @@ public class LoginFrame extends javax.swing.JFrame {
 //            }
             else if("Admin".equals(role) && resultset.next()){
 //                communityAdmin ca = new communityAdmin();
+                setVisible(false);
                 HospitalFrame hospitalFrame=new HospitalFrame();
                 hospitalFrame.setValues(username, role);
-                setVisible(false);
                 hospitalFrame.setVisible(true);
 //                ca.show();
 //               JOptionPane.showMessageDialog(null, "Admin Login Successful!");
