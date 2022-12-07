@@ -18,7 +18,7 @@ public class JDBCConnection {
         try{
        Class.forName("com.mysql.jdbc.Driver");
        System.out.println("connection to db");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "root@123");
             System.out.println("connected ");
         Statement statement = (Statement) connection.createStatement();
 //        ResultSet resultSet = statement.executeQuery("Select * from hospital.login");

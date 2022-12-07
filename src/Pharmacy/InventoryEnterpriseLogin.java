@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import connection.JDBCConnection;
 
 public class InventoryEnterpriseLogin extends javax.swing.JFrame {
 
@@ -40,7 +41,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/AED_Final_Project", "root", "root@123");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/sys", "root", "root@123");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(InventoryEnterpriseLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
