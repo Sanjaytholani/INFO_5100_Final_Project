@@ -192,10 +192,6 @@ public class CreatePatient extends javax.swing.JFrame {
 
                 statement.executeUpdate("insert into AED_Final_Project.patient" + "(name, age, address, username, password)" + "values ('"+name+"','"+age+"','"+address+"','"+username+"','"+password+"')");
                 JOptionPane.showMessageDialog(null, "User successfully added!");
-
-                setVisible(false);
-                new LoginFrame().setVisible(true);
-                connection.close();
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
