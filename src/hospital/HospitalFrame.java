@@ -83,6 +83,11 @@ public class HospitalFrame extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(218, 24, 163));
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Create User");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(218, 24, 163));
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,6 +115,11 @@ public class HospitalFrame extends javax.swing.JFrame {
         jButton9.setBackground(new java.awt.Color(218, 24, 163));
         jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("Create Patient");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,10 +196,15 @@ public class HospitalFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new ViewDoctors().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        new LoginFrame().setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -203,6 +218,20 @@ public class HospitalFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new CreateUser().setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        CreatePatient createPatient=new CreatePatient();
+        createPatient.setRole("Admin");
+        createPatient.setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
