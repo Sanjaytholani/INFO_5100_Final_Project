@@ -176,9 +176,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 ("SELECT * FROM AED_Final_Project.user where role ='" + role + "' and username ='" + username + "' and password = '" + password + "'");
             
             if("Doctor".equals(role) && resultset.next()){
-//                Doctor d = new Doctor();
-//                setVisible(false);
-//                d.show();
+                DoctorFrame d = new DoctorFrame();
+                setVisible(false);
+                d.setDoctor(username);
+                d.setVisible(true);
                JOptionPane.showMessageDialog(null, "Login Successful!");
   
             }
