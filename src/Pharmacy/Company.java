@@ -11,15 +11,9 @@ package Pharmacy;
  
  */
 
-import com.mysql.cj.xdevapi.Statement;
-import com.sun.jdi.connect.spi.Connection;
 //import java.sql.Connection;
 //import java.sql.Statement;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import connection.JDBCConnection;
-import hospital.LoginFrame;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +25,34 @@ public class Company extends javax.swing.JFrame {
      */
     public Company() {
         initComponents();
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM AED_Final_Project.Company";
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String id = Integer.toString(rs.getInt("ID"));
+                String name = rs.getString("NAME");
+                String address = rs.getString("ADDRESS");
+                String expertise = rs.getString("EXPERTISE");
+                String phone = rs.getString("PHONE");
+                String location = rs.getString("LOCATION");
+                
+                
+                String tbData[] = {id,name,address,expertise,phone,location};
+                DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
+                
+                 tb1Model.addRow(tbData);
+                
+            }
+
+
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+        }
     }
 
     /**
@@ -105,10 +127,7 @@ public class Company extends javax.swing.JFrame {
 
         tableCompany.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "NAME", "ADDRESS", "EXPERTISE", "PHONE", "LOCATION"
@@ -254,39 +273,41 @@ public class Company extends javax.swing.JFrame {
     public class Companies{
         
         
-        public static void CreateCompany(String id, String name, String address, String expertise, String phone, String location){
+        public static void CreateCompany(int id, String name, String address, String expertise, String phone, String location){
             
              try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
             
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
+            System.out.print(id);
             String query = "INSERT INTO AED_Final_Project.Company (ID,NAME,ADDRESS,EXPERTISE,PHONE,LOCATION) values(?,?,?,?,?,?)";
             
             java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString(1,id);
+            preparedStmt.setInt(1,id);
             preparedStmt.setString(2,name);
             preparedStmt.setString(3,address);
             preparedStmt.setString(4,expertise);
             preparedStmt.setString(5,phone);
-            preparedStmt.setString(5,location);
+            preparedStmt.setString(6,location);
+            
            
 
             preparedStmt.execute();
                         JOptionPane.showMessageDialog(null,"Name Added");
 
-             connection.close();
         }
         catch(Exception e){
-             JOptionPane.showMessageDialog(null,"please add data in correct format!");
+             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
             
             
 
     
     }                     
-            
+           
 
         }
+           
     
     }     
     
@@ -297,51 +318,71 @@ public class Company extends javax.swing.JFrame {
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
-        if(tableCompany.getSelectedRowCount()== 1){
-        String id = tfID.getText();
+        if(tableCompany.getSelectedRowCount()==1){
+            
+        int id =Integer.parseInt(tfID.getText());
         String name = tfName.getText();
         String address = tfAddress.getText();
         String expertise = tfExpertise.getText();
         String phone = tfPhone.getText();
         String location = (String) cbLocation.getSelectedItem().toString();
-            
-            
-            
-            tb1Model.setValueAt(id,tableCompany.getSelectedRow(), 0);
+        
+        
+           try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "UPDATE AED_Final_Project.Company SET id = '"+id+"', name = '"+name+"', address = '"+address+"', expertise = '"+expertise+"', phone = '"+phone+"', location = '"+location+"' WHERE id ='" +tableCompany.getValueAt(tableCompany.getSelectedRow(), 0).toString()+"'";
+            statement.executeUpdate(sql);
+            tb1Model.setValueAt(Integer.toString(id),tableCompany.getSelectedRow(), 0);
             tb1Model.setValueAt(name,tableCompany.getSelectedRow(), 1);
             tb1Model.setValueAt(address,tableCompany.getSelectedRow(), 2);
             tb1Model.setValueAt(expertise,tableCompany.getSelectedRow(), 3);
             tb1Model.setValueAt(phone,tableCompany.getSelectedRow(), 4);
             tb1Model.setValueAt(location,tableCompany.getSelectedRow(), 5);
             
-            
-            JOptionPane.showMessageDialog(this,"Update Successfully");
 
-            
-        }else{
-            if(tableCompany.getRowCount()== 0){
-                     JOptionPane.showMessageDialog(this,"Table is Empty");
+           }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
 
-            }else{
-                     JOptionPane.showMessageDialog(this,"Please Select Single Row for Update");
-
+            } 
+        }
+        else{
+            if(tableCompany.getRowCount()==0){
+               JOptionPane.showMessageDialog(this, "Table is Empty"); 
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            } 
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
-      
-      if(tableCompany.getSelectedRowCount()==1){
-          tb1Model.removeRow(tableCompany.getSelectedRow());
-      }else{
-          if(tableCompany.getRowCount()==0){
-              JOptionPane.showMessageDialog(null,"Table is Empty");
-          } else{
-              JOptionPane.showMessageDialog(null,"Please Select Single Row");
-          }
-      }
+        if(tableCompany.getSelectedRowCount()==1){
+           try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "DELETE FROM AED_Final_Project.Company WHERE id ='" +tableCompany.getValueAt(tableCompany.getSelectedRow(), 0).toString()+"'";
+            statement.executeUpdate(sql);
+            tb1Model.removeRow(tableCompany.getSelectedRow());
+           }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+            } 
+        }
+        else{
+            if(tableCompany.getRowCount()==0){
+               JOptionPane.showMessageDialog(this, "Table is Empty"); 
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            } 
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void tfPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPhoneActionPerformed
@@ -351,13 +392,13 @@ public class Company extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
         
-        String id = tfID.getText();
+        int id = Integer.parseInt(tfID.getText());
         String name = tfName.getText();
         String address = tfAddress.getText();
         String expertise = tfExpertise.getText();
         String phone = tfPhone.getText();
-        String Location = (String) cbLocation.getSelectedItem().toString();
-        if(id.isEmpty()||name.isEmpty()||phone.isEmpty()){
+        String location = (String) cbLocation.getSelectedItem().toString();
+        if(name.isEmpty()||phone.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
@@ -366,8 +407,12 @@ public class Company extends javax.swing.JFrame {
         
 
         
-            Companies.CreateCompany(id, name, address, expertise, phone, Location);
+        Companies.CreateCompany(id, name, address, expertise, phone, location);
+        String tbData[] = {Integer.toString(id),name,address,expertise,phone,location};
+        DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
         
+        
+        tb1Model.addRow(tbData); 
         }
         
         tfID.setText("");
@@ -377,8 +422,11 @@ public class Company extends javax.swing.JFrame {
         tfPhone.setText("");
         cbLocation.setSelectedItem("");
         
-        company_table();
+        
     }//GEN-LAST:event_buttonAddActionPerformed
+        
+    
+    
         public void company_table(){
         try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
