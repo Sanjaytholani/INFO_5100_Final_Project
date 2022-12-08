@@ -43,6 +43,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +69,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Create User");
+        jLabel5.setText("Login");
 
         jButton1.setBackground(new java.awt.Color(218, 24, 163));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,6 +77,15 @@ public class LoginFrame extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(218, 24, 163));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Patient Login");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -100,7 +110,8 @@ public class LoginFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(272, 272, 272)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -124,6 +135,8 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(273, Short.MAX_VALUE))
         );
 
@@ -178,17 +191,18 @@ public class LoginFrame extends javax.swing.JFrame {
 //                setVisible(false);
 //                p.show();
 //            
-//            }else if("HospitalAdmin".equals(role) && resultset.next()){
-//                HospitalAdmin ha = new HospitalAdmin();
-//                setVisible(false);
-//                ha.show();
-//
 //            }
+            else if("Receptionist".equals(role) && resultset.next()){
+                ReceptionistFrame ha = new ReceptionistFrame();
+                setVisible(false);
+                ha.setVisible(true);
+
+            }
             else if("Admin".equals(role) && resultset.next()){
 //                communityAdmin ca = new communityAdmin();
+                setVisible(false);
                 HospitalFrame hospitalFrame=new HospitalFrame();
                 hospitalFrame.setValues(username, role);
-                setVisible(false);
                 hospitalFrame.setVisible(true);
 //                ca.show();
 //               JOptionPane.showMessageDialog(null, "Admin Login Successful!");
@@ -214,6 +228,12 @@ public class LoginFrame extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new PatientLogin().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +272,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
