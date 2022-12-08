@@ -23,6 +23,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import connection.JDBCConnection;
+import static java.lang.System.err;
+import java.sql.ResultSet;
 
 public class InventoryEnterpriseLogin extends javax.swing.JFrame {
 
@@ -32,25 +34,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
     public InventoryEnterpriseLogin() {
         initComponents();
     }
-    Connection con;
-    PreparedStatement pst;
     
-    
-    public void Connect() 
-    {
-        
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/sys", "root", "root@123");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InventoryEnterpriseLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryEnterpriseLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
-        
-        
-    }
     
     
 
@@ -71,7 +55,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
         pfPassword = new javax.swing.JPasswordField();
         labelRole = new javax.swing.JLabel();
         cfRole = new javax.swing.JComboBox<>();
-        buttonAdd = new javax.swing.JButton();
+        buttonLogin = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,12 +76,12 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
 
         labelRole.setText("ROLE ");
 
-        cfRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT AN OPTION ", "PHARMACY ADMIN", "BLOOD BANK ADMIN " }));
+        cfRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "EMPLOYEE" }));
 
-        buttonAdd.setText("ADD");
-        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+        buttonLogin.setText("LOGIN ");
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddActionPerformed(evt);
+                buttonLoginActionPerformed(evt);
             }
         });
 
@@ -128,7 +112,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(cfRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(71, 71, 71)
                                 .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(96, Short.MAX_VALUE))
@@ -153,7 +137,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
                     .addComponent(cfRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAdd)
+                    .addComponent(buttonLogin)
                     .addComponent(jButton2))
                 .addContainerGap(267, Short.MAX_VALUE))
         );
@@ -176,33 +160,56 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pfPasswordActionPerformed
 
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         // TODO add your handling code here:
         
-        String Username = tfUsername.getText();
-        String Password = pfPassword.getText();
-        String Role = cfRole.getSelectedItem().toString();
+        String username = tfUsername.getText();
+        String password = pfPassword.getText();
+        String role = cfRole.getSelectedItem().toString();
         
-        try {
-            pst = con.prepareStatement("insert into IMLoginPage(USERNAME, PASSWORD, ROLE)values(?,?,?)");
-            pst.setString(1, Username);
-            pst.setString(2, Password);
-            pst.setString(3, Role);
-            pst.executeUpdate();
+        if(username.isEmpty()||password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Details!");
+        }
+        else{
+            try{
+                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+
+                System.out.println("connection open");
+                java.sql.Statement statement = connection.createStatement();
+                System.out.println(role+username+password);
+                ResultSet resultset = statement.executeQuery
+                ("SELECT * FROM AED_Final_Project.InventoryLogin where Role ='" + role + "' and Username ='" + username + "' and Password = '" + password + "'");
+                if("ADMIN".equals(role) && resultset.next()){
+             
+                this.hide();
+                PharmacyAdminLogin pa = new PharmacyAdminLogin();
+                pa.setVisible(true);
+                        
+                    System.err.println("Hello");
+                   JOptionPane.showMessageDialog(null, " Pharmacy Admin Login Successful!");
+
+                }
             
-            JOptionPane.showMessageDialog(this, "User Successfully Added");
+            else if("EMPLOYEE".equals(role) && resultset.next()){
+//                communityAdmin ca = new communityAdmin();
+               
+//                ca.show();
+             JOptionPane.showMessageDialog(null, "Employee Login Successful!");
+
+            }
             
-            tfUsername.setText("");
-            pfPassword.setText("");
-            cfRole.setSelectedIndex(-1);
-            tfUsername.requestFocus();
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryEnterpriseLogin.class.getName()).log(Level.SEVERE, null, ex);
+                else{
+                   JOptionPane.showMessageDialog(null,"Invalid Credentials!"); 
+                }
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+                setVisible(false);
+
+            }
         }
         
-    }//GEN-LAST:event_buttonAddActionPerformed
+    }//GEN-LAST:event_buttonLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,7 +247,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonLogin;
     private javax.swing.JComboBox<String> cfRole;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
