@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hospital;
+import hospital.model.Patient;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import java.sql.DriverManager;
@@ -223,22 +224,11 @@ public class ViewPatinet extends javax.swing.JFrame {
             String name=jTextField2.getText();
             String age=jTextField3.getText();
             String address=jTextField4.getText();
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-                String sql = "UPDATE AED_Final_Project.patient SET name = '"+name+"',age = '"+age+"',address = '"+address+"' WHERE username ='" +jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()+"'";
-                statement.executeUpdate(sql);
-                tb1Model.setValueAt(name,jTable1.getSelectedRow(), 1);
-                tb1Model.setValueAt(age,jTable1.getSelectedRow(), 2);
-                tb1Model.setValueAt(address,jTable1.getSelectedRow(), 3);
-
-
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            }
+            Patient patient= new Patient(name, age, jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), address, "");
+            patient.updatePatient();
+            tb1Model.setValueAt(name,jTable1.getSelectedRow(), 1);
+            tb1Model.setValueAt(age,jTable1.getSelectedRow(), 2);
+            tb1Model.setValueAt(address,jTable1.getSelectedRow(), 3);  
         }
         else{
             if(jTable1.getRowCount()==0){
@@ -254,21 +244,15 @@ public class ViewPatinet extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRowCount()==1){
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-                String sql = "DELETE FROM AED_Final_Project.patient WHERE username ='" +jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()+"'";
-                statement.executeUpdate(sql);
+                String name=jTextField2.getText();
+                String age=jTextField3.getText();
+                String address=jTextField4.getText();
+                Patient patient= new Patient(name, age, jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), address, "");
+                patient.deletePatient();
                 tb1Model.removeRow(jTable1.getSelectedRow());
                 jTextField2.setText("");
                 jTextField3.setText("");
                 jTextField4.setText("");
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            }
         }
         else{
             if(jTable1.getRowCount()==0){
