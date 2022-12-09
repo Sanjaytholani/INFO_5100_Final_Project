@@ -4,6 +4,7 @@
  */
 package Emergency;
 
+import Emergency.model.AmbulanceModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
@@ -32,6 +33,28 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
      */
     public AmbulanceAdmin() {
         initComponents();
+        try{
+            
+            java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
+            String sql = "SELECT * FROM AED_Final_Project.ambulance;";
+           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
+            //JOptionPane.showMessageDialog(null, "User successfully added!");
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String id = rs.getString("id");
+                String area = rs.getString("area");
+                
+                
+                String tbData[] = {id,area};
+                DefaultTableModel tb1Model = (DefaultTableModel)ambulanceTable.getModel();
+                
+                tb1Model.addRow(tbData);
+                
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"please add data in correct format!");
+    }     
     }
 
     /**
@@ -46,7 +69,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        policeTable = new javax.swing.JTable();
+        ambulanceTable = new javax.swing.JTable();
         updateBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -56,7 +79,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         passwordTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        viewBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         detailsTable = new javax.swing.JTable();
@@ -67,23 +90,20 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        policeTable.setModel(new javax.swing.table.DefaultTableModel(
+        ambulanceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ambulance No", "Area"
             }
         ));
-        policeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        ambulanceTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                policeTableMouseClicked(evt);
+                ambulanceTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(policeTable);
+        jScrollPane1.setViewportView(ambulanceTable);
 
         updateBtn.setBackground(new java.awt.Color(153, 0, 0));
         updateBtn.setText("Update");
@@ -121,11 +141,11 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(153, 0, 0));
         jLabel7.setText("Password:");
 
-        viewBtn.setBackground(new java.awt.Color(153, 0, 0));
-        viewBtn.setText("View");
-        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+        deleteBtn.setBackground(new java.awt.Color(153, 0, 0));
+        deleteBtn.setText("Delete");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBtnActionPerformed(evt);
+                deleteBtnActionPerformed(evt);
             }
         });
 
@@ -139,7 +159,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(addTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(viewBtn)
+                .addComponent(deleteBtn)
                 .addGap(142, 142, 142))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +203,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,34 +342,22 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel tb1Model = (DefaultTableModel)policeTable.getModel();
-        tb1Model.setRowCount(0);
-        try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/universitysystem", "root", "user@1234");
-            java.sql.Statement statement = connection.createStatement();
-            String studentQuery = "SELECT * FROM universitysystem.police";
-            java.sql.ResultSet studentData = statement.executeQuery(studentQuery);
+       String id = ambulanceNo.getText();
+        String area = areaTxt.getText();
 
-            while(studentData.next()){
-                String id = studentData.getString("id");
-                String  name = studentData.getString("name");
-                String gender = studentData.getString("gender");
-                String phone = studentData.getString("phone");
-                String age = studentData.getString("age");
-                String salary = studentData.getString("salary");
-                String designation = studentData.getString("designation");
+        if(id.isEmpty()||area.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Ambulance name is empty");
+        }else{
+                AmbulanceModel ambulance=new AmbulanceModel(id,area);
+                ambulance.deleteAmbulance();
+                JOptionPane.showMessageDialog(null,"Deleted successfully");
+                DefaultTableModel tb1Model = (DefaultTableModel)ambulanceTable.getModel();
+                tb1Model.removeRow(ambulanceTable.getSelectedRow());
 
-                String tbData[] = {id,name, gender, phone,age,salary,designation};
-
-                tb1Model.addRow(tbData);
-            }
-
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
         }
-    }//GEN-LAST:event_viewBtnActionPerformed
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void passwordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtActionPerformed
         // TODO add your handling code here:
@@ -359,136 +367,53 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String id = ambulanceNo.getText();
 
-        String name = areaTxt.getText();
+        String area = areaTxt.getText();
         String password = passwordTxt.getText();
 
         if(ambulanceNo.getText().isEmpty()|| areaTxt.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Plz Enter Details!");
         } else{
             // Community.CreateCommunity(house,person,community,city,hospital);
-            CreateAmbulance(id,name,password);
+            AmbulanceModel ambulance = new AmbulanceModel(id,area);
+            ambulance.setPassword(password);
+            ambulance.createAmbulance();
         }
 
         //JOptionPane.showMessageDialog(this,"New Employ details Added");
-
+                String tbData[] = {id,area};
+                DefaultTableModel tb1Model = (DefaultTableModel)ambulanceTable.getModel();
+                
+                tb1Model.addRow(tbData);
         ambulanceNo.setText("");
         areaTxt.setText("");
         passwordTxt.setText("");
-
+        
         // police_table();
     }//GEN-LAST:event_addTxtActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        DefaultTableModel profModel = (DefaultTableModel)policeTable.getModel();
-        String id = ambulanceNo.geText();
-        String Name = areaTxt.getText();
+        String id = ambulanceNo.getText();
+        String area = areaTxt.getText();
 
-        if(policeUsername.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Professor name is empty");
+        if(id.isEmpty()||area.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Ambulance name is empty");
         }else{
-            try{
-                java.sql.Statement statement = JDBCConnection.Connect().createStatement();
-                String profQuery = "UPDATE universitysystem.police SET name = '"+Name+"', gender = '"+Gender+"', age = '"+age+"', phone = '"+phone+"',phone = '"+phone+"',phone = '"+phone+"' WHERE username = '"+policeUsername+"'";
-                statement.executeUpdate(profQuery);
+                AmbulanceModel ambulance=new AmbulanceModel(id,area);
+                ambulance.updateAmbulance();
                 JOptionPane.showMessageDialog(null,"Updated successfully");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,e);
-
-            }
+                ambulanceTable.setValueAt(id, ambulanceTable.getSelectedRow(), 0);
+                ambulanceTable.setValueAt(area, ambulanceTable.getSelectedRow(), 1);
 
         }
     }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void policeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_policeTableMouseClicked
+    private void ambulanceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ambulanceTableMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel profModel = (DefaultTableModel)policeTable.getModel();
-        String PnameTxt = policeTable.getValueAt(policeTable.getSelectedRow(), 1).toString();
-        areaTxt.setText(policeTable.getValueAt(policeTable.getSelectedRow(), 1).toString());
-        ambulanceNo.setText(policeTable.getValueAt(policeTable.getSelectedRow(), 0).toString());
-        genderTxt.setSelectedItem(policeTable.getValueAt(policeTable.getSelectedRow(), 2).toString());
-        ageTxt.setText(policeTable.getValueAt(policeTable.getSelectedRow(), 4).toString());
-        phoneTxt.setText(policeTable.getValueAt(policeTable.getSelectedRow(), 3).toString());
-        salaryTxt.setText(policeTable.getValueAt(policeTable.getSelectedRow(), 5).toString());
-        designationTxt.setSelectedItem(policeTable.getValueAt(policeTable.getSelectedRow(), 6).toString());
-
-        try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/universitysystem", "root", "user@1234");
-            java.sql.Statement statement = connection.createStatement();
-            String profQuery = "SELECT * FROM universitysystem.police WHERE name = '"+PnameTxt+"'";
-            java.sql.ResultSet profData = statement.executeQuery(profQuery);
-            while(profData.next()){
-                policeUsername = profData.getString("username");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-    }//GEN-LAST:event_policeTableMouseClicked
-    String policeUsername = "";
+        areaTxt.setText(ambulanceTable.getValueAt(ambulanceTable.getSelectedRow(), 1).toString());
+        ambulanceNo.setText(ambulanceTable.getValueAt(ambulanceTable.getSelectedRow(), 0).toString());
+    }//GEN-LAST:event_ambulanceTableMouseClicked
+     
     
-        
-        
-    public static void CreateAmbulance(String id, String name, String password){
-            
-             try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-                        System.out.println("connection open");
-
-            String query = "INSERT INTO AED_Final_Project.ambulance (id,area,password) values(?,?,?,?,?,?,?)";
-           
-
-           // java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString(1,id);
-            preparedStmt.setString(2,name);
-            preparedStmt.setString(3,password);
-            
-            System.out.println("connection insert");
-            
-            preparedStmt.execute();
-             System.out.println("connection run");
-             JOptionPane.showMessageDialog(null,"Details Added");
-
-             connection.close();
-        }
-        catch(Exception e){
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null,"please add data in correct format!");
-        }      
-             
-        }
-    
-    
-    
-    
-    public void ambulance_table(){
-        try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM AED_Final_Project.ambulance;";
-           // statement.executeUpdate("insert into hospitalsystem.login" + "(role, username, password)" + "values ('"+role+"','"+username+"', '"+password+"')");
-            //JOptionPane.showMessageDialog(null, "User successfully added!");
-            java.sql.ResultSet rs = statement.executeQuery(sql);
-            while(rs.next()){
-                String id = rs.getString("id");
-                String area = rs.getString("area");
-                
-                
-                String tbData[] = {id,area};
-                DefaultTableModel tb1Model = (DefaultTableModel)policeTable.getModel();
-                
-                tb1Model.addRow(tbData);
-                
-            }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,"please add data in correct format!");
-    }                                 
-    }
     
     /**
      * @param args the command line arguments
@@ -529,7 +454,9 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTxt;
     private javax.swing.JTextField ambulanceNo;
+    private javax.swing.JTable ambulanceTable;
     private javax.swing.JTextField areaTxt;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JTable detailsTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -544,9 +471,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField passwordTxt;
-    private javax.swing.JTable policeTable;
     private javax.swing.JTextField searchTxt;
     private javax.swing.JButton updateBtn;
-    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

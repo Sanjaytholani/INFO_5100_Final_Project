@@ -4,6 +4,7 @@
  */
 package Emergency;
 
+import Emergency.model.AmbulanceRequestModel;
 import connection.JDBCConnection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -214,49 +215,7 @@ public class AmbulanceRequest extends javax.swing.JFrame {
     private void phoneTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTxtActionPerformed
-
-    
-        
-        
-    public static void Create(String name, String phone, String address, String cd){
-            
-             try{
-            
-            java.sql.Statement statement =JDBCConnection.Connect().createStatement();
-            System.out.println("connection open");
-
-            String query = "INSERT INTO AED_Final_Project.ambulanceRequest (name,phone,address,details) values(?,?,?,?)";
-                        System.out.println("connection insert");
-
-           // java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            java.sql.PreparedStatement preparedStmt = JDBCConnection.Connect().prepareStatement(query);
-            preparedStmt.setString(1,name);
-            
-            System.out.println("connection insert");
-            
-            preparedStmt.setString(2,phone);
-            preparedStmt.setString(3,address);
-            preparedStmt.setString(4,cd);
-
-
-            System.out.println("connection insert");
-
-            preparedStmt.execute();
-             System.out.println("connection run");
-             JOptionPane.showMessageDialog(null,"Details Added");
-
-             connection.close();
-        }
-        catch(Exception e){
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null,"please add data in correct format!");
-        }      
-             
-        }
-    
-    
-    
-    
+ 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
         String name = nameTxt.getText();
@@ -270,14 +229,11 @@ public class AmbulanceRequest extends javax.swing.JFrame {
        
         
         if(addressTxt.getText().isEmpty()|| nameTxt.getText().isEmpty()||phoneTxt.getText().isEmpty()||cdTxt.getText().isEmpty()           ){
-                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");
-
-        
+                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");        
         } else{
-
-        
-        // Community.CreateCommunity(house,person,community,city,hospital);
-         Create(name,phone,address,cd);
+         AmbulanceRequestModel ambulanceRequest=new AmbulanceRequestModel(name,phone,address,cd);
+         ambulanceRequest.createAmbulanceRequest();
+         JOptionPane.showMessageDialog(null,"Ambulance Request Created!");
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 

@@ -55,7 +55,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="addTxt" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="viewBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -113,7 +113,7 @@
                       <EmptySpace pref="491" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="addTxt" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="viewBtn" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="deleteBtn" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="updateBtn" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -142,10 +142,10 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="policeTable">
+                <Component class="javax.swing.JTable" name="ambulanceTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="4">
+                      <Table columnCount="2" rowCount="0">
                         <Column editable="true" title="Ambulance No" type="java.lang.Object"/>
                         <Column editable="true" title="Area" type="java.lang.Object"/>
                       </Table>
@@ -169,7 +169,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="policeTableMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ambulanceTableMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -241,15 +241,15 @@
                 <Property name="text" type="java.lang.String" value="Password:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="viewBtn">
+            <Component class="javax.swing.JButton" name="deleteBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="99" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="View"/>
+                <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
