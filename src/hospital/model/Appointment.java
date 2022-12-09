@@ -91,4 +91,14 @@ public class Appointment {
                 JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
             }
     }
+    public void updateDoctorAppointment(){
+        try{
+                java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
+                String sql = "UPDATE AED_Final_Project.appointment SET status = '"+this.status+"',prescription = '"+this.prescription+"' WHERE id ='" +this.id+"'";
+                statement.executeUpdate(sql);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+            }
+    }
 }

@@ -4,6 +4,7 @@
  */
 package hospital;
 
+import hospital.model.Appointment;
 import javax.swing.table.DefaultTableModel;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -184,20 +185,13 @@ public class DoctorFrame extends javax.swing.JFrame {
             if(status.length()<1&&prescription.length()<1){
                 JOptionPane.showMessageDialog(null,"Enter All the values");
             }
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-                String sql = "UPDATE AED_Final_Project.appointment SET status = '"+status+"',prescription = '"+prescription+"' WHERE id ='" +Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())+"'";
-                statement.executeUpdate(sql);
+                Appointment appointment=new Appointment("", "");
+                appointment.setStatus(status);
+                appointment.setPrescription(prescription);
+                appointment.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                appointment.updateDoctorAppointment();
                 tb1Model.setValueAt(status,jTable1.getSelectedRow(), 2);
                 tb1Model.setValueAt(prescription,jTable1.getSelectedRow(), 3);
-
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            }
         }
         else{
             if(jTable1.getRowCount()==0){
@@ -213,20 +207,12 @@ public class DoctorFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRowCount()==1){
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-                String sql = "DELETE FROM AED_Final_Project.appointment WHERE id ='" +Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())+"'";
-                statement.executeUpdate(sql);
+                Appointment appointment=new Appointment("", "");
+                appointment.setId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                appointment.deleteAppointment();
                 tb1Model.removeRow(jTable1.getSelectedRow());
                 jTextField2.setText("");
                 jTextField3.setText("");
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            }
         }
         else{
             if(jTable1.getRowCount()==0){
