@@ -9,6 +9,7 @@ package Pharmacy;
  * @author prathamesh
  */
 
+import Pharmacy.model.MedicineModel;
 import com.mysql.cj.xdevapi.Statement;
 import com.sun.jdi.connect.spi.Connection;
 //import java.sql.Connection;
@@ -278,45 +279,11 @@ public class Medicines extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public class Medicine{
-        
-        
-        public static void CreateMedicine(int id, String medicine, String price, String quantity, String production, String expiry, String company){
-            
-             try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            System.out.print(id);
-            String query = "INSERT INTO AED_Final_Project.Medicine (ID,MEDICINE_NAME,PRICE,QUANTITY,PRODUCTION_DATE,EXPIRY_DATE,COMPANY) values(?,?,?,?,?,?,?)";
-            
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1,id);
-            preparedStmt.setString(2,medicine);
-            preparedStmt.setString(3,price);
-            preparedStmt.setString(4,quantity);
-            preparedStmt.setString(5,production);
-            preparedStmt.setString(6,expiry);
-            preparedStmt.setString(7,company);
-           
-
-            preparedStmt.execute();
-                        JOptionPane.showMessageDialog(null,"Name Added");
-
-        }
-        catch(Exception e){
-             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-            
-            
-
     
-    }                     
-           
+            
+            
 
-        }
-    
-    }     
+       
     
     
     
@@ -347,25 +314,18 @@ public class Medicines extends javax.swing.JFrame {
         String expiry = (String) cbExpiry.getSelectedItem().toString();
         String company = (String) cbCompany.getSelectedItem().toString();
         
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "UPDATE AED_Final_Project.Medicine SET id = '"+id+"', medicine_name = '"+medicine+"', price = '"+price+"', quantity = '"+quantity+"', production_date = '"+production+"', expiry_date = '"+expiry+"' , company = '"+company+"'  WHERE id ='" +tableMedicine.getValueAt(tableMedicine.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.setValueAt(Integer.toString(id),tableMedicine.getSelectedRow(), 0);
-            tb1Model.setValueAt(medicine,tableMedicine.getSelectedRow(), 1);
-            tb1Model.setValueAt(price,tableMedicine.getSelectedRow(), 2);
-            tb1Model.setValueAt(quantity,tableMedicine.getSelectedRow(), 3);
-            tb1Model.setValueAt(production,tableMedicine.getSelectedRow(), 4);
-            tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 5);
-            tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 6);
-
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
+        medicines.updateMedicines();  
+        
+        tb1Model.setValueAt(medicine,tableMedicine.getSelectedRow(), 1);
+        tb1Model.setValueAt(price,tableMedicine.getSelectedRow(), 2);
+        tb1Model.setValueAt(quantity,tableMedicine.getSelectedRow(), 3); 
+        tb1Model.setValueAt(production,tableMedicine.getSelectedRow(), 4); 
+        tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 5); 
+        tb1Model.setValueAt(company,tableMedicine.getSelectedRow(), 6); 
+        
+        
+        
         }
         else{
             if(tableMedicine.getRowCount()==0){
@@ -396,23 +356,17 @@ public class Medicines extends javax.swing.JFrame {
        
 
         
-        Medicine.CreateMedicine(id, medicine, price, quantity, production, expiry, company);
+        MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
+        medicines.insertMedicines();
         String tbData[] = {Integer.toString(id),medicine,price,quantity,production,expiry,company};
         DefaultTableModel tb1Model = (DefaultTableModel)tableMedicine.getModel();
                 
-            tb1Model.addRow(tbData); 
+        tb1Model.addRow(tbData); 
         
         
         
         }
         
-        tfID.setText("");
-        tfMedicine.setText("");
-        tfPrice.setText("");
-        tfQuantity.setText("");
-        cbProduction.setSelectedItem("");
-        cbExpiry.setSelectedItem("");
-        cbCompany.setSelectedItem("");
         
         
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -483,19 +437,28 @@ public class Medicines extends javax.swing.JFrame {
         
         DefaultTableModel tb1Model = (DefaultTableModel)tableMedicine.getModel();
         if(tableMedicine.getSelectedRowCount()==1){
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "DELETE FROM AED_Final_Project.Medicine WHERE id ='" +tableMedicine.getValueAt(tableMedicine.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.removeRow(tableMedicine.getSelectedRow());
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        int id = Integer.parseInt(tfID.getText());
+        String medicine = tfMedicine.getText();
+        String price = tfPrice.getText();
+        String quantity = tfQuantity.getText();
+        String production = (String) cbProduction.getSelectedItem().toString();
+        String expiry = (String) cbExpiry.getSelectedItem().toString();
+        String company = (String) cbCompany.getSelectedItem().toString();
+        MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
+        medicines.deleteMedicines();
+        
+        tb1Model.removeRow(tableMedicine.getSelectedRow());
+        
+        tfID.setText("");
+        tfMedicine.setText("");
+        tfPrice.setText("");
+        tfQuantity.setText("");
+        cbProduction.setSelectedItem("");
+        cbExpiry.setSelectedItem("");
+        cbCompany.setSelectedItem("");
+        
         }
+        
         else{
             if(tableMedicine.getRowCount()==0){
                JOptionPane.showMessageDialog(this, "Table is Empty"); 
