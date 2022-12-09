@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hospital;
+import hospital.model.User;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -183,19 +184,10 @@ public class ViewDoctors extends javax.swing.JFrame {
         if(jTable1.getSelectedRowCount()==1){
             
            String name=jTextField2.getText();
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "UPDATE AED_Final_Project.user SET name = '"+name+"' WHERE username ='" +jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.setValueAt(name,jTable1.getSelectedRow(), 1);
-
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+           String username=jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+           User user=new User(name,username,"","Doctor");
+           user.updateUser();
+           tb1Model.setValueAt(name,jTable1.getSelectedRow(), 1);
         }
         else{
             if(jTable1.getRowCount()==0){
@@ -211,18 +203,12 @@ public class ViewDoctors extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRowCount()==1){
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "DELETE FROM AED_Final_Project.user WHERE username ='" +jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
+            String name=jTextField2.getText();
+            String username=jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            User user=new User(name,username,"","Doctor");
+            user.deleteUser();
             tb1Model.removeRow(jTable1.getSelectedRow());
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
 
-            } 
         }
         else{
             if(jTable1.getRowCount()==0){
