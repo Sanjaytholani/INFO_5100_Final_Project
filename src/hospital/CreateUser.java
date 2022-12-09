@@ -16,6 +16,7 @@ import com.sun.jdi.connect.spi.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import connection.JDBCConnection;
+import hospital.model.User;
 import javax.swing.JOptionPane;
 public class CreateUser extends javax.swing.JFrame {
 
@@ -172,25 +173,9 @@ public class CreateUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
-            try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            
-            statement.executeUpdate("insert into AED_Final_Project.user" + "(role, username, password, name)" + "values ('"+role+"','"+username+"', '"+password+"', '"+name+"')");
-            JOptionPane.showMessageDialog(null, "User successfully added!");
-                        
-
-//            setVisible(false);
-//            new Login().setVisible(true);
-//            connection.close();
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-                setVisible(false);
-
-            }
+            User user= new User(name, username, password, role);
+            user.insertUser();
+            JOptionPane.showMessageDialog(null, "User successfully added!");                 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

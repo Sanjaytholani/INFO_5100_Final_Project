@@ -4,6 +4,7 @@
  */
 package hospital;
 
+import hospital.model.Appointment;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
@@ -174,20 +175,15 @@ public class CreateAppointmentFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String doctor=jComboBox1.getSelectedItem().toString();
         String patient=jComboBox2.getSelectedItem().toString();
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+        if(doctor.length()<1&&patient.length()<1){
+            JOptionPane.showMessageDialog(rootPane, "Select Doctor and Patient");
+        }
+        else{
+            Appointment appointment=new Appointment(doctor, patient);
+            appointment.createAppointment();
+            JOptionPane.showMessageDialog(rootPane, "Appointment Confirmed");
 
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-
-                statement.executeUpdate("insert into AED_Final_Project.appointment" + "(doctor, patient)" + "values ('"+doctor+"', '"+patient+"')");
-                JOptionPane.showMessageDialog(null, "Appointment Confirmed!");
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-                setVisible(false);
-
-            }
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
