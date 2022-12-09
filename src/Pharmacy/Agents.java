@@ -20,6 +20,7 @@ import hospital.LoginFrame;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Pharmacy.model.AgentModel;
 
 public class Agents extends javax.swing.JFrame {
 
@@ -286,46 +287,6 @@ public class Agents extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-   public class Agent{
-        
-        
-        public static void CreateAgent(int id, String name, String age, String phone, String password, String gender){
-            
-             try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            System.out.print(id);
-            String query = "INSERT INTO AED_Final_Project.Agent (ID,NAME,AGE,PHONE,PASSWORD,GENDER) values(?,?,?,?,?,?)";
-            
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1,id);
-            preparedStmt.setString(2,name);
-            preparedStmt.setString(3,age);
-            preparedStmt.setString(4,phone);
-            preparedStmt.setString(5,password);
-            preparedStmt.setString(6,gender);
-           
-
-            preparedStmt.execute();
-                        JOptionPane.showMessageDialog(null,"Name Added");
-
-        }
-        catch(Exception e){
-             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-            
-            
-
-    
-    }                     
-           
-
-        }
-    
-    }     
-    
     
     
     
@@ -347,24 +308,16 @@ public class Agents extends javax.swing.JFrame {
         String password = tfPassword.getText();
         String gender = (String) cbGender.getSelectedItem().toString();
         
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "UPDATE AED_Final_Project.Agent SET id = '"+id+"', name = '"+name+"', age = '"+age+"', phone = '"+phone+"', password = '"+password+"', gender = '"+gender+"'   WHERE id ='" +tableAgent.getValueAt(tableAgent.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.setValueAt(Integer.toString(id),tableAgent.getSelectedRow(), 0);
-            tb1Model.setValueAt(name,tableAgent.getSelectedRow(), 1);
-            tb1Model.setValueAt(age,tableAgent.getSelectedRow(), 2);
-            tb1Model.setValueAt(phone,tableAgent.getSelectedRow(), 3);
-            tb1Model.setValueAt(password,tableAgent.getSelectedRow(), 4);
-            tb1Model.setValueAt(gender,tableAgent.getSelectedRow(), 5);
-
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        
+        AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
+        agent.updateAgents();
+        tb1Model.setValueAt(name,tableAgent.getSelectedRow(), 1);
+        tb1Model.setValueAt(age,tableAgent.getSelectedRow(), 2);
+        tb1Model.setValueAt(phone,tableAgent.getSelectedRow(), 3); 
+        tb1Model.setValueAt(password,tableAgent.getSelectedRow(), 4); 
+        tb1Model.setValueAt(gender,tableAgent.getSelectedRow(), 5); 
+        
+        
         }
         else{
             if(tableAgent.getRowCount()==0){
@@ -380,18 +333,23 @@ public class Agents extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
         if(tableAgent.getSelectedRowCount()==1){
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "DELETE FROM AED_Final_Project.Agent WHERE id ='" +tableAgent.getValueAt(tableAgent.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.removeRow(tableAgent.getSelectedRow());
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        int id =Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        String age = tfAge.getText();
+        String phone = tfPhone.getText();
+        String password = tfPassword.getText();
+        String gender = (String) cbGender.getSelectedItem().toString();
+        AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
+        agent.deleteAgents();
+        tb1Model.removeRow(tableAgent.getSelectedRow());
+        tfID.setText("");
+        tfName.setText("");
+        tfAge.setText("");
+        tfPhone.setText("");
+        tfPassword.setText("");
+        cbGender.setSelectedItem("");
+        
+           
         }
         else{
             if(tableAgent.getRowCount()==0){
@@ -425,23 +383,18 @@ public class Agents extends javax.swing.JFrame {
         else{
        
 
+        AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
+        agent.insertAgents();
+         String tbData[] = {Integer.toString(id),name,age,phone,password,gender};
+         DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
+            
+          tb1Model.addRow(tbData); 
         
-
-        
-            Agent.CreateAgent(id, name, age, phone, password, gender);
-            String tbData[] = {Integer.toString(id),name,age,phone,password,gender};
-            DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
-                
-            tb1Model.addRow(tbData); 
+            
         
         }
         
-        tfID.setText("");
-        tfName.setText("");
-        tfAge.setText("");
-        tfPhone.setText("");
-        tfPassword.setText("");
-        cbGender.setSelectedItem("");     
+          
     }//GEN-LAST:event_buttonAddActionPerformed
         
     
