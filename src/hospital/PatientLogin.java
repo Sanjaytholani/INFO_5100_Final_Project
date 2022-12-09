@@ -164,10 +164,10 @@ public class PatientLogin extends javax.swing.JFrame {
                 ("SELECT * FROM AED_Final_Project.patient where username ='" + username + "' and password = '" + password + "'");
 
                 if(resultset.next()){
-                    //                Doctor d = new Doctor();
-                    //                setVisible(false);
-                    //                d.show();
-                    JOptionPane.showMessageDialog(null, "Login Successful!");
+                    this.setVisible(false);
+                    PatientFrame patientFrame=new PatientFrame();
+                    patientFrame.setPatient(username);
+                    patientFrame.setVisible(true);
 
                 }
                 else{
