@@ -9,6 +9,7 @@ package Pharmacy;
  * @author prathamesh
  */
 
+import Pharmacy.model.MedicineModel;
 import com.mysql.cj.xdevapi.Statement;
 import com.sun.jdi.connect.spi.Connection;
 //import java.sql.Connection;
@@ -88,6 +89,8 @@ public class Medicines extends javax.swing.JFrame {
         cbProduction = new javax.swing.JComboBox<>();
         cbExpiry = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
+        buttonSearch = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,6 +181,15 @@ public class Medicines extends javax.swing.JFrame {
             }
         });
 
+        buttonSearch.setText("SEARCH");
+
+        buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,40 +197,47 @@ public class Medicines extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(119, 119, 119)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfID)
-                                    .addComponent(tfMedicine)
-                                    .addComponent(tfPrice)
-                                    .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
-                                .addGap(120, 120, 120)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbCompany, 0, 250, Short.MAX_VALUE)
-                                    .addComponent(cbProduction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbExpiry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(48, 48, 48)
+                                    .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(41, 41, 41)
+                                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(35, 35, 35)
+                                    .addComponent(buttonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(56, 56, 56)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(tfID)
+                                                .addComponent(tfMedicine)
+                                                .addComponent(tfPrice)
+                                                .addComponent(tfQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                                            .addGap(142, 142, 142)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(cbCompany, 0, 250, Short.MAX_VALUE)
+                                                .addComponent(cbProduction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cbExpiry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(74, 74, 74)
+                                            .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(315, 315, 315)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -227,7 +246,6 @@ public class Medicines extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,8 +255,10 @@ public class Medicines extends javax.swing.JFrame {
                             .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(73, 73, 73))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(buttonCancel))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,12 +276,13 @@ public class Medicines extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(cbCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(136, 136, 136)))
+                        .addGap(125, 125, 125)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd)
                     .addComponent(buttonUpdate)
-                    .addComponent(buttonDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                    .addComponent(buttonDelete)
+                    .addComponent(buttonSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,47 +292,6 @@ public class Medicines extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public class Medicine{
-        
-        
-        public static void CreateMedicine(int id, String medicine, String price, String quantity, String production, String expiry, String company){
-            
-             try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            System.out.print(id);
-            String query = "INSERT INTO AED_Final_Project.Medicine (ID,MEDICINE_NAME,PRICE,QUANTITY,PRODUCTION_DATE,EXPIRY_DATE,COMPANY) values(?,?,?,?,?,?,?)";
-            
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1,id);
-            preparedStmt.setString(2,medicine);
-            preparedStmt.setString(3,price);
-            preparedStmt.setString(4,quantity);
-            preparedStmt.setString(5,production);
-            preparedStmt.setString(6,expiry);
-            preparedStmt.setString(7,company);
-           
-
-            preparedStmt.execute();
-                        JOptionPane.showMessageDialog(null,"Name Added");
-
-        }
-        catch(Exception e){
-             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-            
-            
-
-    
-    }                     
-           
-
-        }
-    
-    }     
-    
-    
     
     
     private void tfMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMedicineActionPerformed
@@ -340,25 +320,18 @@ public class Medicines extends javax.swing.JFrame {
         String expiry = (String) cbExpiry.getSelectedItem().toString();
         String company = (String) cbCompany.getSelectedItem().toString();
         
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "UPDATE AED_Final_Project.Medicine SET id = '"+id+"', medicine_name = '"+medicine+"', price = '"+price+"', quantity = '"+quantity+"', production_date = '"+production+"', expiry_date = '"+expiry+"' , company = '"+company+"'  WHERE id ='" +tableMedicine.getValueAt(tableMedicine.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.setValueAt(Integer.toString(id),tableMedicine.getSelectedRow(), 0);
-            tb1Model.setValueAt(medicine,tableMedicine.getSelectedRow(), 1);
-            tb1Model.setValueAt(price,tableMedicine.getSelectedRow(), 2);
-            tb1Model.setValueAt(quantity,tableMedicine.getSelectedRow(), 3);
-            tb1Model.setValueAt(production,tableMedicine.getSelectedRow(), 4);
-            tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 5);
-            tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 6);
-
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
+        medicines.updateMedicines();  
+        
+        tb1Model.setValueAt(medicine,tableMedicine.getSelectedRow(), 1);
+        tb1Model.setValueAt(price,tableMedicine.getSelectedRow(), 2);
+        tb1Model.setValueAt(quantity,tableMedicine.getSelectedRow(), 3); 
+        tb1Model.setValueAt(production,tableMedicine.getSelectedRow(), 4); 
+        tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 5); 
+        tb1Model.setValueAt(company,tableMedicine.getSelectedRow(), 6); 
+        
+        
+        
         }
         else{
             if(tableMedicine.getRowCount()==0){
@@ -389,23 +362,17 @@ public class Medicines extends javax.swing.JFrame {
        
 
         
-        Medicine.CreateMedicine(id, medicine, price, quantity, production, expiry, company);
+        MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
+        medicines.insertMedicines();
         String tbData[] = {Integer.toString(id),medicine,price,quantity,production,expiry,company};
         DefaultTableModel tb1Model = (DefaultTableModel)tableMedicine.getModel();
                 
-            tb1Model.addRow(tbData); 
+        tb1Model.addRow(tbData); 
         
         
         
         }
         
-        tfID.setText("");
-        tfMedicine.setText("");
-        tfPrice.setText("");
-        tfQuantity.setText("");
-        cbProduction.setSelectedItem("");
-        cbExpiry.setSelectedItem("");
-        cbCompany.setSelectedItem("");
         
         
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -476,19 +443,28 @@ public class Medicines extends javax.swing.JFrame {
         
         DefaultTableModel tb1Model = (DefaultTableModel)tableMedicine.getModel();
         if(tableMedicine.getSelectedRowCount()==1){
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "DELETE FROM AED_Final_Project.Medicine WHERE id ='" +tableMedicine.getValueAt(tableMedicine.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.removeRow(tableMedicine.getSelectedRow());
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        int id = Integer.parseInt(tfID.getText());
+        String medicine = tfMedicine.getText();
+        String price = tfPrice.getText();
+        String quantity = tfQuantity.getText();
+        String production = (String) cbProduction.getSelectedItem().toString();
+        String expiry = (String) cbExpiry.getSelectedItem().toString();
+        String company = (String) cbCompany.getSelectedItem().toString();
+        MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
+        medicines.deleteMedicines();
+        
+        tb1Model.removeRow(tableMedicine.getSelectedRow());
+        
+        tfID.setText("");
+        tfMedicine.setText("");
+        tfPrice.setText("");
+        tfQuantity.setText("");
+        cbProduction.setSelectedItem("");
+        cbExpiry.setSelectedItem("");
+        cbCompany.setSelectedItem("");
+        
         }
+        
         else{
             if(tableMedicine.getRowCount()==0){
                JOptionPane.showMessageDialog(this, "Table is Empty"); 
@@ -498,6 +474,13 @@ public class Medicines extends javax.swing.JFrame {
             } 
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        // TODO add your handling code here:
+         this.hide();
+        PharmacyAdminLogin frm = new PharmacyAdminLogin();
+        frm.setVisible(true);
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -536,7 +519,9 @@ public class Medicines extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonSearch;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox<String> cbCompany;
     private javax.swing.JComboBox<String> cbExpiry;

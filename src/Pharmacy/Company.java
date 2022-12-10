@@ -7,25 +7,33 @@ package Pharmacy;
 /**
  *
  * @author prathamesh
- * 
- 
  */
 
+
+import Pharmacy.model.CompanyModel;
+import Pharmacy.model.MedicineModel;
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.jdi.connect.spi.Connection;
 //import java.sql.Connection;
 //import java.sql.Statement;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import connection.JDBCConnection;
+import hospital.LoginFrame;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-
 public class Company extends javax.swing.JFrame {
 
     /**
      * Creates new form Company
      */
+    
+    
+    
     public Company() {
         initComponents();
-        try{
+         try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
@@ -64,45 +72,57 @@ public class Company extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         tfID = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
         tfAddress = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        tfExpertise = new javax.swing.JTextField();
+        tfPhone = new javax.swing.JTextField();
         buttonAdd = new javax.swing.JButton();
         buttonUpdate = new javax.swing.JButton();
+        buttonSearch = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         tableCompany = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        tfPhone = new javax.swing.JTextField();
-        tfExpertise = new javax.swing.JTextField();
         cbLocation = new javax.swing.JComboBox<>();
+        buttonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("MANAGE  COMPANY");
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MANAGE COMPANY ");
 
-        jLabel13.setText("ID ");
+        jLabel2.setText("ID ");
 
-        jLabel14.setText("NAME ");
+        jLabel3.setText("NAME");
 
-        jLabel15.setText("ADDRESS");
+        jLabel4.setText("ADDRESS");
 
-        jLabel16.setText("LOCATION");
+        tfID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfIDActionPerformed(evt);
+            }
+        });
 
-        jLabel17.setText("EXPERTISE ");
+        jLabel5.setText("EXPERTISE");
 
-        jLabel19.setText("PHONE");
+        jLabel6.setText("PHONE");
+
+        jLabel7.setText("LOCATION ");
+
+        tfPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPhoneActionPerformed(evt);
+            }
+        });
 
         buttonAdd.setText("ADD");
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +137,8 @@ public class Company extends javax.swing.JFrame {
                 buttonUpdateActionPerformed(evt);
             }
         });
+
+        buttonSearch.setText("SEARCH");
 
         buttonDelete.setText("DELETE");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -138,188 +160,123 @@ public class Company extends javax.swing.JFrame {
                 tableCompanyMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tableCompany);
+        jScrollPane1.setViewportView(tableCompany);
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("COMPANY LIST ");
+        cbLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        tfPhone.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPhoneActionPerformed(evt);
+                buttonCancelActionPerformed(evt);
             }
         });
 
-        cbLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOSTON", "CALIFORNIA", "NEW YORK " }));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(60, 60, 60)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfID, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                                    .addComponent(tfName)
-                                    .addComponent(tfAddress))
-                                .addGap(161, 161, 161)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfPhone, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfID)
+                                    .addComponent(tfName)
+                                    .addComponent(tfAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                                .addGap(120, 120, 120)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfExpertise)
-                                    .addComponent(cbLocation, 0, 235, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addGap(130, 130, 130)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 405, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113)
-                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(86, 86, 86)
-                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(147, 147, 147)))
-                .addContainerGap())
+                                    .addComponent(tfPhone)
+                                    .addComponent(cbLocation, 0, 250, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel12)
-                .addGap(73, 73, 73)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(buttonCancel))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
+                    .addComponent(jLabel5)
                     .addComponent(tfExpertise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel19)
-                        .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
+                    .addComponent(jLabel6)
+                    .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
                     .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
+                    .addComponent(jLabel7)
                     .addComponent(cbLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(137, 137, 137)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(120, 120, 120)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd)
                     .addComponent(buttonUpdate)
+                    .addComponent(buttonSearch)
                     .addComponent(buttonDelete))
-                .addGap(45, 45, 45)
-                .addComponent(jLabel4)
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1299, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public class Companies{
-        
-        
-        public static void CreateCompany(int id, String name, String address, String expertise, String phone, String location){
-            
-             try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            System.out.print(id);
-            String query = "INSERT INTO AED_Final_Project.Company (ID,NAME,ADDRESS,EXPERTISE,PHONE,LOCATION) values(?,?,?,?,?,?)";
-            
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1,id);
-            preparedStmt.setString(2,name);
-            preparedStmt.setString(3,address);
-            preparedStmt.setString(4,expertise);
-            preparedStmt.setString(5,phone);
-            preparedStmt.setString(6,location);
-            
-           
-
-            preparedStmt.execute();
-                        JOptionPane.showMessageDialog(null,"Name Added");
-
-        }
-        catch(Exception e){
-             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-            
-            
-
-    
-    }                     
-           
-
-        }
-           
-    
-    }     
-    
-    
-    
-    
-    
-    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
+    private void tfPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPhoneActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
-        if(tableCompany.getSelectedRowCount()==1){
-            
+    }//GEN-LAST:event_tfPhoneActionPerformed
+
+    private void tfIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfIDActionPerformed
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        // TODO add your handling code here:
         int id =Integer.parseInt(tfID.getText());
         String name = tfName.getText();
         String address = tfAddress.getText();
@@ -327,107 +284,29 @@ public class Company extends javax.swing.JFrame {
         String phone = tfPhone.getText();
         String location = (String) cbLocation.getSelectedItem().toString();
         
-        
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "UPDATE AED_Final_Project.Company SET id = '"+id+"', name = '"+name+"', address = '"+address+"', expertise = '"+expertise+"', phone = '"+phone+"', location = '"+location+"' WHERE id ='" +tableCompany.getValueAt(tableCompany.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.setValueAt(Integer.toString(id),tableCompany.getSelectedRow(), 0);
-            tb1Model.setValueAt(name,tableCompany.getSelectedRow(), 1);
-            tb1Model.setValueAt(address,tableCompany.getSelectedRow(), 2);
-            tb1Model.setValueAt(expertise,tableCompany.getSelectedRow(), 3);
-            tb1Model.setValueAt(phone,tableCompany.getSelectedRow(), 4);
-            tb1Model.setValueAt(location,tableCompany.getSelectedRow(), 5);
-            
-
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
-        }
-        else{
-            if(tableCompany.getRowCount()==0){
-               JOptionPane.showMessageDialog(this, "Table is Empty"); 
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Select a Row");
-            } 
-        }
-    }//GEN-LAST:event_buttonUpdateActionPerformed
-
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
-        if(tableCompany.getSelectedRowCount()==1){
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "DELETE FROM AED_Final_Project.Company WHERE id ='" +tableCompany.getValueAt(tableCompany.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.removeRow(tableCompany.getSelectedRow());
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
-        }
-        else{
-            if(tableCompany.getRowCount()==0){
-               JOptionPane.showMessageDialog(this, "Table is Empty"); 
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Select a Row");
-            } 
-        }
-    }//GEN-LAST:event_buttonDeleteActionPerformed
-
-    private void tfPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPhoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPhoneActionPerformed
-
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        // TODO add your handling code here:
-        
-        int id = Integer.parseInt(tfID.getText());
-        String name = tfName.getText();
-        String address = tfAddress.getText();
-        String expertise = tfExpertise.getText();
-        String phone = tfPhone.getText();
-        String location = (String) cbLocation.getSelectedItem().toString();
-        if(name.isEmpty()||phone.isEmpty()){
+        if(name.isEmpty()||location.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
        
 
         
-
-        
-        Companies.CreateCompany(id, name, address, expertise, phone, location);
+        CompanyModel companies = new CompanyModel(id, name, address, expertise, phone, location);
+        companies.insertCompanies();  
         String tbData[] = {Integer.toString(id),name,address,expertise,phone,location};
         DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
-        
-        
+                
         tb1Model.addRow(tbData); 
+        
+        
+        
         }
         
-        tfID.setText("");
-        tfName.setText("");
-        tfAddress.setText("");
-        tfExpertise.setText("");
-        tfPhone.setText("");
-        cbLocation.setSelectedItem("");
         
         
     }//GEN-LAST:event_buttonAddActionPerformed
-        
     
-    
-        public void company_table(){
+    public void company_table(){
         try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
             
@@ -445,6 +324,7 @@ public class Company extends javax.swing.JFrame {
                 String location = rs.getString("LOCATION");
                 
                 
+                
                 String tbData[] = {id,name,address,expertise,phone,location};
                 DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
                 
@@ -459,8 +339,51 @@ public class Company extends javax.swing.JFrame {
     
     }                                 
     }
+    
+    
+    
+    
+    
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
+        if(tableCompany.getSelectedRowCount()==1){
+            
+        int id =Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        String address = tfAddress.getText();
+        String expertise = tfExpertise.getText();
+        String phone = tfPhone.getText();
+        String location = (String) cbLocation.getSelectedItem().toString();
+        
+        
+        CompanyModel companies = new CompanyModel(id, name, address, expertise, phone, location);
+        companies.updateCompanies();  
+        
+        tb1Model.setValueAt(name,tableCompany.getSelectedRow(), 1);
+        tb1Model.setValueAt(address,tableCompany.getSelectedRow(), 2);
+        tb1Model.setValueAt(expertise,tableCompany.getSelectedRow(), 3); 
+        tb1Model.setValueAt(phone,tableCompany.getSelectedRow(), 4); 
+        tb1Model.setValueAt(location,tableCompany.getSelectedRow(), 5); 
+        
+        
+        
+        
+        }
+        else{
+            if(tableCompany.getRowCount()==0){
+               JOptionPane.showMessageDialog(this, "Table is Empty"); 
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            } 
+        }
+    }//GEN-LAST:event_buttonUpdateActionPerformed
+
     private void tableCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCompanyMouseClicked
         // TODO add your handling code here:
+        
         DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
         
         String tb1id = tb1Model.getValueAt(tableCompany.getSelectedRow(),0).toString();
@@ -469,7 +392,7 @@ public class Company extends javax.swing.JFrame {
         String tb1expertise = tb1Model.getValueAt(tableCompany.getSelectedRow(),3).toString();
         String tb1phone = tb1Model.getValueAt(tableCompany.getSelectedRow(),4).toString();
         String tb1location = tb1Model.getValueAt(tableCompany.getSelectedRow(),5).toString();
-       
+        
         
         tfID.setText(tb1id);
         tfName.setText(tb1name);
@@ -478,9 +401,53 @@ public class Company extends javax.swing.JFrame {
         tfPhone.setText(tb1phone);
         cbLocation.setSelectedItem(tb1location);
         
-        
     }//GEN-LAST:event_tableCompanyMouseClicked
-       
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // TODO add your handling code here:
+        
+        
+        DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
+        if(tableCompany.getSelectedRowCount()==1){
+        int id = Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        String address = tfAddress.getText();
+        String expertise = tfExpertise.getText();
+        String phone = tfPhone.getText();
+        String location = (String) cbLocation.getSelectedItem().toString();
+        
+        CompanyModel companies = new CompanyModel(id, name, address, expertise, phone, location);
+        companies.deleteCompanies();  
+        
+        tb1Model.removeRow(tableCompany.getSelectedRow());
+        
+        tfID.setText("");
+        tfName.setText("");
+        tfAddress.setText("");
+        tfExpertise.setText("");
+        tfPhone.setText("");
+        cbLocation.setSelectedItem("");
+        
+        
+        }
+        
+        else{
+            if(tableCompany.getRowCount()==0){
+               JOptionPane.showMessageDialog(this, "Table is Empty"); 
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            } 
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        PharmacyAdminLogin frm = new PharmacyAdminLogin();
+        frm.setVisible(true);
+    }//GEN-LAST:event_buttonCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -518,20 +485,20 @@ public class Company extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonSearch;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox<String> cbLocation;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableCompany;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfExpertise;
