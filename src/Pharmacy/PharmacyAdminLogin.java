@@ -55,6 +55,11 @@ public class PharmacyAdminLogin extends javax.swing.JFrame {
         });
 
         buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,6 +115,14 @@ public class PharmacyAdminLogin extends javax.swing.JFrame {
         Company pa = new Company();
         pa.setVisible(true);
     }//GEN-LAST:event_buttonCompanyActionPerformed
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        InventoryEnterpriseLogin form = new InventoryEnterpriseLogin();
+        form.setVisible(true);
+        
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     /**
      * @param args the command line arguments
