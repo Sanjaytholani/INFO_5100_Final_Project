@@ -227,7 +227,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Phone", "Address", "Crime Details", "Officer Name", "Action Taken"
+                "Name", "Phone", "Address", "Details", "Ambulance No", "Action Taken"
             }
         ));
         jScrollPane2.setViewportView(detailsTable);

@@ -326,8 +326,8 @@
                         <Column editable="true" title="Name" type="java.lang.Object"/>
                         <Column editable="true" title="Phone" type="java.lang.Object"/>
                         <Column editable="true" title="Address" type="java.lang.Object"/>
-                        <Column editable="true" title="Crime Details" type="java.lang.Object"/>
-                        <Column editable="true" title="Officer Name" type="java.lang.Object"/>
+                        <Column editable="true" title="Details" type="java.lang.Object"/>
+                        <Column editable="true" title="Ambulance No" type="java.lang.Object"/>
                         <Column editable="true" title="Action Taken" type="java.lang.Object"/>
                       </Table>
                     </Property>

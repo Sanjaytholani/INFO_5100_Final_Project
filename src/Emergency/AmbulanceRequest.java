@@ -7,6 +7,7 @@ package Emergency;
 import Emergency.model.AmbulanceRequestModel;
 import connection.JDBCConnection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ public class AmbulanceRequest extends javax.swing.JFrame {
     /**
      * Creates new form AmbulanceRequest
      */
+    String username="";
     public AmbulanceRequest() {
         initComponents();
     }
@@ -244,7 +246,7 @@ public class AmbulanceRequest extends javax.swing.JFrame {
         try{
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
             java.sql.Statement statement = connection.createStatement();
-            String studentQuery = "SELECT * FROM AED_Final_Project.ambulanceRequest";
+            String studentQuery = "SELECT * FROM AED_Final_Project.ambulanceRequest WHERE name='"+this.username+"'";
             java.sql.ResultSet studentData = statement.executeQuery(studentQuery);
 
             while(studentData.next()){
@@ -303,6 +305,25 @@ public class AmbulanceRequest extends javax.swing.JFrame {
                 new AmbulanceRequest().setVisible(true);
             }
         });
+    }
+    public void setDetails(String username){
+        this.username=username;
+        try{
+            java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
+            ResultSet resultset = statement.executeQuery
+                 ("SELECT * FROM AED_Final_Project.patient where username ='" + username + "'");
+            if(resultset.next()){
+                String name = resultset.getString("name");
+                String address=resultset.getString("address");
+                nameTxt.setText(name);
+                addressTxt.setText(address);
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+            setVisible(false);
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
