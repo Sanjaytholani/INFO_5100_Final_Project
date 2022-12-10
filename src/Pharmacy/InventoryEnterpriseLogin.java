@@ -191,9 +191,9 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
                 }
             
             else if("EMPLOYEE".equals(role) && resultset.next()){
-//                communityAdmin ca = new communityAdmin();
-               
-//                ca.show();
+             Employee ha = new Employee();
+                setVisible(false);
+                ha.setVisible(true);
              JOptionPane.showMessageDialog(null, "Employee Login Successful!");
 
             }

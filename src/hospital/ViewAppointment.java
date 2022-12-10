@@ -4,6 +4,7 @@
  */
 package hospital;
 
+import hospital.model.Appointment;
 import javax.swing.table.DefaultTableModel;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -202,21 +203,16 @@ public class ViewAppointment extends javax.swing.JFrame {
         if(jTable1.getSelectedRowCount()==1){
             String doctor=jComboBox1.getSelectedItem().toString();
             String patient=jComboBox2.getSelectedItem().toString();
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-                String sql = "UPDATE AED_Final_Project.appointment SET doctor = '"+doctor+"', patient = '"+patient+"' WHERE id ='" +Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())+"'";
-                statement.executeUpdate(sql);
-                tb1Model.setValueAt(doctor,jTable1.getSelectedRow(), 1);
-                tb1Model.setValueAt(patient,jTable1.getSelectedRow(), 2);
+            int id=Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            Appointment appointment= new Appointment(doctor, patient);
+            appointment.setId(id);
+            appointment.updateAppointment();
+            tb1Model.setValueAt(doctor,jTable1.getSelectedRow(), 1);
+            tb1Model.setValueAt(patient,jTable1.getSelectedRow(), 2);
 
 
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
 
-            }
+           
         }
         else{
             if(jTable1.getRowCount()==0){
@@ -232,18 +228,14 @@ public class ViewAppointment extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRowCount()==1){
-            try{
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-                System.out.println("connection open");
-                java.sql.Statement statement = connection.createStatement();
-                String sql = "DELETE FROM AED_Final_Project.appointment WHERE id ='" +Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())+"'";
-                statement.executeUpdate(sql);
-                tb1Model.removeRow(jTable1.getSelectedRow());
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+            String doctor=jComboBox1.getSelectedItem().toString();
+            String patient=jComboBox2.getSelectedItem().toString();
+            int id=Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            Appointment appointment= new Appointment(doctor, patient);
+            appointment.setId(id);
+            appointment.deleteAppointment();
+            tb1Model.removeRow(jTable1.getSelectedRow());
 
-            }
         }
         else{
             if(jTable1.getRowCount()==0){

@@ -20,6 +20,7 @@ import hospital.LoginFrame;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Pharmacy.model.AgentModel;
 
 public class Agents extends javax.swing.JFrame {
 
@@ -83,11 +84,12 @@ public class Agents extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableAgent = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonSearch = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfPhone = new javax.swing.JTextField();
         tfPassword = new javax.swing.JTextField();
+        buttonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,16 +158,23 @@ public class Agents extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("AGENTS LIST ");
 
-        jButton1.setText("CLEAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonSearch.setText("SEARCH");
+        buttonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonSearchActionPerformed(evt);
             }
         });
 
         jLabel5.setText("PHONE");
 
         jLabel6.setText("PASSWORD ");
+
+        buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -174,16 +183,6 @@ public class Agents extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(60, 60, 60)
-                            .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(84, 84, 84)
-                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(73, 73, 73)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,20 +204,34 @@ public class Agents extends javax.swing.JFrame {
                             .addComponent(tfPassword, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfPhone, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbGender, 0, 250, Short.MAX_VALUE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGap(79, 79, 79)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(60, 60, 60)
+                            .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(84, 84, 84)
+                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(214, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buttonDelete, jButton1});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {buttonDelete, buttonSearch});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel12)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonCancel)
+                    .addComponent(jLabel12))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
@@ -226,7 +239,7 @@ public class Agents extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
+                        .addGap(67, 67, 67)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -248,7 +261,7 @@ public class Agents extends javax.swing.JFrame {
                     .addComponent(buttonAdd)
                     .addComponent(buttonUpdate)
                     .addComponent(buttonDelete)
-                    .addComponent(jButton1))
+                    .addComponent(buttonSearch))
                 .addGap(45, 45, 45)
                 .addComponent(jLabel4)
                 .addGap(54, 54, 54)
@@ -286,46 +299,6 @@ public class Agents extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-   public class Agent{
-        
-        
-        public static void CreateAgent(int id, String name, String age, String phone, String password, String gender){
-            
-             try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            System.out.print(id);
-            String query = "INSERT INTO AED_Final_Project.Agent (ID,NAME,AGE,PHONE,PASSWORD,GENDER) values(?,?,?,?,?,?)";
-            
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1,id);
-            preparedStmt.setString(2,name);
-            preparedStmt.setString(3,age);
-            preparedStmt.setString(4,phone);
-            preparedStmt.setString(5,password);
-            preparedStmt.setString(6,gender);
-           
-
-            preparedStmt.execute();
-                        JOptionPane.showMessageDialog(null,"Name Added");
-
-        }
-        catch(Exception e){
-             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-            
-            
-
-    
-    }                     
-           
-
-        }
-    
-    }     
-    
     
     
     
@@ -347,24 +320,16 @@ public class Agents extends javax.swing.JFrame {
         String password = tfPassword.getText();
         String gender = (String) cbGender.getSelectedItem().toString();
         
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "UPDATE AED_Final_Project.Agent SET id = '"+id+"', name = '"+name+"', age = '"+age+"', phone = '"+phone+"', password = '"+password+"', gender = '"+gender+"'   WHERE id ='" +tableAgent.getValueAt(tableAgent.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.setValueAt(Integer.toString(id),tableAgent.getSelectedRow(), 0);
-            tb1Model.setValueAt(name,tableAgent.getSelectedRow(), 1);
-            tb1Model.setValueAt(age,tableAgent.getSelectedRow(), 2);
-            tb1Model.setValueAt(phone,tableAgent.getSelectedRow(), 3);
-            tb1Model.setValueAt(password,tableAgent.getSelectedRow(), 4);
-            tb1Model.setValueAt(gender,tableAgent.getSelectedRow(), 5);
-
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        
+        AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
+        agent.updateAgents();
+        tb1Model.setValueAt(name,tableAgent.getSelectedRow(), 1);
+        tb1Model.setValueAt(age,tableAgent.getSelectedRow(), 2);
+        tb1Model.setValueAt(phone,tableAgent.getSelectedRow(), 3); 
+        tb1Model.setValueAt(password,tableAgent.getSelectedRow(), 4); 
+        tb1Model.setValueAt(gender,tableAgent.getSelectedRow(), 5); 
+        
+        
         }
         else{
             if(tableAgent.getRowCount()==0){
@@ -380,18 +345,23 @@ public class Agents extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
         if(tableAgent.getSelectedRowCount()==1){
-           try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-            String sql = "DELETE FROM AED_Final_Project.Agent WHERE id ='" +tableAgent.getValueAt(tableAgent.getSelectedRow(), 0).toString()+"'";
-            statement.executeUpdate(sql);
-            tb1Model.removeRow(tableAgent.getSelectedRow());
-           }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-
-            } 
+        int id =Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        String age = tfAge.getText();
+        String phone = tfPhone.getText();
+        String password = tfPassword.getText();
+        String gender = (String) cbGender.getSelectedItem().toString();
+        AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
+        agent.deleteAgents();
+        tb1Model.removeRow(tableAgent.getSelectedRow());
+        tfID.setText("");
+        tfName.setText("");
+        tfAge.setText("");
+        tfPhone.setText("");
+        tfPassword.setText("");
+        cbGender.setSelectedItem("");
+        
+           
         }
         else{
             if(tableAgent.getRowCount()==0){
@@ -403,9 +373,9 @@ public class Agents extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonSearchActionPerformed
 
     private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
         // TODO add your handling code here:
@@ -425,23 +395,18 @@ public class Agents extends javax.swing.JFrame {
         else{
        
 
+        AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
+        agent.insertAgents();
+         String tbData[] = {Integer.toString(id),name,age,phone,password,gender};
+         DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
+            
+          tb1Model.addRow(tbData); 
         
-
-        
-            Agent.CreateAgent(id, name, age, phone, password, gender);
-            String tbData[] = {Integer.toString(id),name,age,phone,password,gender};
-            DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
-                
-            tb1Model.addRow(tbData); 
+            
         
         }
         
-        tfID.setText("");
-        tfName.setText("");
-        tfAge.setText("");
-        tfPhone.setText("");
-        tfPassword.setText("");
-        cbGender.setSelectedItem("");     
+          
     }//GEN-LAST:event_buttonAddActionPerformed
         
     
@@ -499,6 +464,13 @@ public class Agents extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tableAgentMouseClicked
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        PharmacyAdminLogin frm = new PharmacyAdminLogin();
+        frm.setVisible(true);
+    }//GEN-LAST:event_buttonCancelActionPerformed
         
     
     /**
@@ -538,10 +510,11 @@ public class Agents extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonSearch;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox<String> cbGender;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
