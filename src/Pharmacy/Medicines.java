@@ -280,13 +280,6 @@ public class Medicines extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-            
-            
-
-       
-    
-    
-    
     
     private void tfMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMedicineActionPerformed
         // TODO add your handling code here:
