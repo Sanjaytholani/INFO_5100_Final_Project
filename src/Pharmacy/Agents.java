@@ -96,6 +96,7 @@ public class Agents extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonMedicine = new javax.swing.JButton();
         buttonCompany = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -305,6 +306,13 @@ public class Agents extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("VIEW ORDERS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -313,7 +321,8 @@ public class Agents extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonMedicine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                    .addComponent(buttonCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -321,8 +330,10 @@ public class Agents extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(buttonMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(166, 166, 166)
+                .addGap(88, 88, 88)
                 .addComponent(buttonCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -351,7 +362,7 @@ public class Agents extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -554,6 +565,13 @@ public class Agents extends javax.swing.JFrame {
         tableAgent.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(tfSearch.getText().trim()));
     }//GEN-LAST:event_tfSearchKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+                this.hide();
+                ViewMedicineOrders pa = new ViewMedicineOrders();
+                pa.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
         
     
     /**
@@ -599,6 +617,7 @@ public class Agents extends javax.swing.JFrame {
     private javax.swing.JButton buttonMedicine;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JComboBox<String> cbGender;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

@@ -9,7 +9,9 @@ package Pharmacy;
  * @author prathamesh
  */
 
+import Pharmacy.model.EmployeeModel;
 import Pharmacy.model.MedicineModel;
+import Pharmacy.model.OrderModel;
 import com.mysql.cj.xdevapi.Statement;
 import com.sun.jdi.connect.spi.Connection;
 //import java.sql.Connection;
@@ -17,7 +19,9 @@ import com.sun.jdi.connect.spi.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import connection.JDBCConnection;
+import hospital.HospitalFrame;
 import hospital.LoginFrame;
+import hospital.ReceptionistFrame;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -29,6 +33,7 @@ public class Medicines extends javax.swing.JFrame {
     /**
      * Creates new form Medicines
      */
+    String role;
     public Medicines() {
         initComponents();
         try{
@@ -52,6 +57,8 @@ public class Medicines extends javax.swing.JFrame {
                  tb1Model.addRow(tbData);
                 
             }
+            
+            
 
 
         }
@@ -96,7 +103,9 @@ public class Medicines extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonAgent = new javax.swing.JButton();
         buttonCompany = new javax.swing.JButton();
+        buttonBook = new javax.swing.JButton();
         tfSearch = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -210,6 +219,13 @@ public class Medicines extends javax.swing.JFrame {
             }
         });
 
+        buttonBook.setText("BOOK THE MEDICINE");
+        buttonBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBookActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,21 +235,34 @@ public class Medicines extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttonBook, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(178, 178, 178)
+                .addGap(125, 125, 125)
                 .addComponent(buttonAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170)
-                .addComponent(buttonCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(buttonCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118)
+                .addComponent(buttonBook, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfSearchKeyPressed(evt);
+            }
+        });
+
+        jButton1.setText("MAIN PAGE ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -287,9 +316,12 @@ public class Medicines extends javax.swing.JFrame {
                                     .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(113, 113, 113)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                        .addGap(116, 116, 116)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +371,10 @@ public class Medicines extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
                 .addContainerGap())
         );
 
@@ -532,8 +567,13 @@ public class Medicines extends javax.swing.JFrame {
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         // TODO add your handling code here:
          this.hide();
-        PharmacyAdminLogin frm = new PharmacyAdminLogin();
-        frm.setVisible(true);
+         if(this.role=="Admin"){
+            new PharmacyAdminLogin().setVisible(true);
+        }
+         else{
+            new EmployeeLogin().setVisible(true);
+        }
+        
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgentActionPerformed
@@ -557,6 +597,33 @@ public class Medicines extends javax.swing.JFrame {
         tableMedicine.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(tfSearch.getText().trim()));
     }//GEN-LAST:event_tfSearchKeyPressed
+
+    private void buttonBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(tfID.getText());
+        String medicine = tfMedicine.getText();
+        String quantity = tfQuantity.getText();
+        String production = (String) cbProduction.getSelectedItem().toString();
+        String expiry = (String) cbExpiry.getSelectedItem().toString();
+        String company = (String) cbCompany.getSelectedItem().toString();
+        
+        if(medicine.isEmpty()||quantity.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Details!");
+        }
+        else{
+            OrderModel orders = new OrderModel(id, medicine, quantity,production, expiry, company);
+            orders.insertMedicinesOrder();
+            JOptionPane.showMessageDialog(null, "Medicine Order Successful");
+            
+        }
+    }//GEN-LAST:event_buttonBookActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        PharmacyAdminLogin frm = new PharmacyAdminLogin();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -596,6 +663,7 @@ public class Medicines extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAgent;
+    private javax.swing.JButton buttonBook;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonCompany;
     private javax.swing.JButton buttonDelete;
@@ -604,6 +672,7 @@ public class Medicines extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCompany;
     private javax.swing.JComboBox<String> cbExpiry;
     private javax.swing.JComboBox<String> cbProduction;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

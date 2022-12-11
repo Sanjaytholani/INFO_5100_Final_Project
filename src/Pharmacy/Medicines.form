@@ -81,11 +81,15 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                       <Component id="jTextField1" min="-2" pref="577" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="360" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="141" max="32767" attributes="0"/>
+              <EmptySpace pref="128" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -147,7 +151,10 @@
                       <EmptySpace pref="43" max="32767" attributes="0"/>
                       <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="286" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="189" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -391,17 +398,24 @@
                       <Component id="buttonAgent" max="32767" attributes="0"/>
                       <Component id="buttonCompany" pref="155" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="buttonBook" pref="193" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                   <Component id="buttonAgent" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
-                  <Component id="buttonCompany" min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                  <Component id="buttonCompany" min="-2" pref="49" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                  <Component id="buttonBook" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -424,11 +438,27 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCompanyActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="buttonBook">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="BOOK THE MEDICINE"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBookActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="tfSearch">
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfSearchKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MAIN PAGE "/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

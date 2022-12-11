@@ -27,6 +27,8 @@ public class EmployeeLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonMedicine = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,21 +40,46 @@ public class EmployeeLogin extends javax.swing.JFrame {
             }
         });
 
+        buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("VIEW ORDERS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(buttonMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(137, 137, 137)
+                            .addComponent(buttonMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(244, 244, 244)
+                            .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(231, 231, 231)
-                .addComponent(buttonMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addGap(107, 107, 107)
+                .addComponent(buttonMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         pack();
@@ -64,6 +91,20 @@ public class EmployeeLogin extends javax.swing.JFrame {
         Medicines pa = new Medicines();
         pa.setVisible(true);
     }//GEN-LAST:event_buttonMedicineActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+           this.hide();
+        ViewMedicineOrders pa = new ViewMedicineOrders();
+        pa.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        InventoryEnterpriseLogin frm = new InventoryEnterpriseLogin();
+        frm.setVisible(true);
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,6 +142,8 @@ public class EmployeeLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonMedicine;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
