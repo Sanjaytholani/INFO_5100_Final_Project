@@ -51,6 +51,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="buttonCancel" min="-2" pref="244" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -58,36 +63,34 @@
                           <Component id="jLabel1" min="-2" pref="601" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                          <Component id="buttonAdd" min="-2" pref="267" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="buttonView" min="-2" pref="246" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel3" max="32767" attributes="0"/>
-                              <Component id="jLabel4" pref="160" max="32767" attributes="0"/>
-                              <Component id="jLabel6" max="32767" attributes="0"/>
-                              <Component id="jLabel7" max="32767" attributes="0"/>
-                              <Component id="jLabel2" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="tfPhone" max="32767" attributes="0"/>
-                              <Component id="tfAddress" alignment="0" max="32767" attributes="0"/>
-                              <Component id="tfName" max="32767" attributes="0"/>
-                              <Component id="tfID" max="32767" attributes="0"/>
-                              <Component id="cbBloodgroup" alignment="0" pref="250" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel3" max="32767" attributes="0"/>
+                                      <Component id="jLabel4" pref="160" max="32767" attributes="0"/>
+                                      <Component id="jLabel6" max="32767" attributes="0"/>
+                                      <Component id="jLabel7" max="32767" attributes="0"/>
+                                      <Component id="jLabel2" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="tfPhone" max="32767" attributes="0"/>
+                                      <Component id="tfAddress" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfName" max="32767" attributes="0"/>
+                                      <Component id="tfID" max="32767" attributes="0"/>
+                                      <Component id="cbBloodgroup" alignment="0" pref="250" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="buttonView" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="buttonAdd" alignment="0" pref="267" max="32767" attributes="0"/>
+                                  <Component id="buttonView1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="buttonCancel" min="-2" pref="244" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
+                  <EmptySpace pref="137" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -101,7 +104,7 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfID" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -121,12 +124,13 @@
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="buttonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonView" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <Component id="buttonAdd" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="buttonView" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="buttonView1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="buttonCancel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -218,6 +222,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCancelActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="buttonView1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="VIEW REQUEST "/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonView1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -377,7 +377,11 @@ public class Ambulance extends javax.swing.JFrame {
             String query="SELECT * from AED_Final_Project.Donor WHERE BLOOD_GROUP='"+cbBloodgroup.getSelectedItem().toString()+"'";
              ResultSet resultset = statement.executeQuery(query);
              if(resultset.next()){
-                 JOptionPane.showMessageDialog(rootPane, "Blood Group Available and will be provided!!");
+                 String donorName=resultset.getString("Name");
+                 String newQuery="INSERT INTO AED_Final_Project.donorRequest (donor,bloodgroup,ambulance) values ('"+donorName+"','"+cbBloodgroup.getSelectedItem().toString()+"','"+ambulanceNoTxt.getText()+"')";
+                 statement.executeUpdate(newQuery);
+                 JOptionPane.showMessageDialog(rootPane, "Request Placed");
+  
              }
              else{
                 JOptionPane.showMessageDialog(rootPane, "Blood Group Not Available");
