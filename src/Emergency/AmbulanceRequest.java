@@ -46,6 +46,7 @@ public class AmbulanceRequest extends javax.swing.JFrame {
         cdTxt = new javax.swing.JTextField();
         submitBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        logoutBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         detailsTable = new javax.swing.JTable();
@@ -78,6 +79,12 @@ public class AmbulanceRequest extends javax.swing.JFrame {
             }
         });
 
+        cdTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cdTxtActionPerformed(evt);
+            }
+        });
+
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +95,13 @@ public class AmbulanceRequest extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Request Ambulance");
+
+        logoutBtn.setText("Log Out");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,13 +127,18 @@ public class AmbulanceRequest extends javax.swing.JFrame {
                                     .addComponent(nameTxt)
                                     .addComponent(phoneTxt)
                                     .addComponent(addressTxt)
-                                    .addComponent(cdTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))))))
+                                    .addComponent(cdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(396, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addComponent(logoutBtn)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,6 +288,16 @@ public class AmbulanceRequest extends javax.swing.JFrame {
          }   
     }//GEN-LAST:event_viewBtnActionPerformed
 
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginFrame().setVisible(true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void cdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cdTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cdTxtActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,6 +369,7 @@ public class AmbulanceRequest extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField phoneTxt;
     private javax.swing.JButton submitBtn;

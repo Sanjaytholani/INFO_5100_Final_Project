@@ -53,6 +53,7 @@ public class Ambulance extends javax.swing.JFrame {
         cbBloodgroup = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         requestBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +144,13 @@ public class Ambulance extends javax.swing.JFrame {
             }
         });
 
+        logoutBtn.setText("Log Out");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,7 +184,9 @@ public class Ambulance extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(354, 354, 354)
+                        .addGap(18, 18, 18)
+                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(171, 171, 171)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
@@ -192,8 +202,10 @@ public class Ambulance extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutBtn))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -232,7 +244,7 @@ public class Ambulance extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(requestBtn)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -395,6 +407,12 @@ public class Ambulance extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_requestBtnActionPerformed
 
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginFrame().setVisible(true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -449,6 +467,7 @@ public class Ambulance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField phoneTxt;
     private javax.swing.JButton requestBtn;
