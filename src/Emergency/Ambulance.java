@@ -56,6 +56,7 @@ public class Ambulance extends javax.swing.JFrame {
         logoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 102, 102));
 
         requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,6 +111,8 @@ public class Ambulance extends javax.swing.JFrame {
 
         ambulanceNoTxt.setEditable(false);
 
+        viewBtn.setBackground(new java.awt.Color(204, 204, 255));
+        viewBtn.setForeground(new java.awt.Color(255, 51, 51));
         viewBtn.setText("View Record");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +120,8 @@ public class Ambulance extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setBackground(new java.awt.Color(204, 204, 255));
+        submitBtn.setForeground(new java.awt.Color(255, 51, 51));
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +142,8 @@ public class Ambulance extends javax.swing.JFrame {
 
         jLabel8.setText("Blood Group");
 
+        requestBtn.setBackground(new java.awt.Color(204, 204, 255));
+        requestBtn.setForeground(new java.awt.Color(255, 51, 51));
         requestBtn.setText("Request Blood ");
         requestBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +151,8 @@ public class Ambulance extends javax.swing.JFrame {
             }
         });
 
+        logoutBtn.setBackground(new java.awt.Color(204, 204, 255));
+        logoutBtn.setForeground(new java.awt.Color(255, 102, 102));
         logoutBtn.setText("Log Out");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
