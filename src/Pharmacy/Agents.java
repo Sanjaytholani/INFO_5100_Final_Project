@@ -287,9 +287,9 @@ public class Agents extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addComponent(jLabel4)
-                .addGap(92, 92, 92)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
         buttonMedicine.setText("MEDICINE");
@@ -401,6 +401,8 @@ public class Agents extends javax.swing.JFrame {
         tb1Model.setValueAt(password,tableAgent.getSelectedRow(), 4); 
         tb1Model.setValueAt(gender,tableAgent.getSelectedRow(), 5); 
         
+        JOptionPane.showMessageDialog(this, "Agent Updated Succesfully"); 
+        
         
         }
         else{
@@ -432,6 +434,8 @@ public class Agents extends javax.swing.JFrame {
         tfPhone.setText("");
         tfPassword.setText("");
         cbGender.setSelectedItem("");
+        
+        JOptionPane.showMessageDialog(this, "Agent Deleted Succesfully"); 
         
            
         }

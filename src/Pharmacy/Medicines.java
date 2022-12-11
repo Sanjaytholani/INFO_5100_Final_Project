@@ -40,6 +40,24 @@ public class Medicines extends javax.swing.JFrame {
             java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
             System.out.println("connection open");
             java.sql.Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM AED_Final_Project.Company";
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String username = rs.getString("name");
+                cbCompany.addItem(username);
+                
+                
+            }
+
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+        }
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
             String sql = "SELECT * FROM AED_Final_Project.Medicine";
             java.sql.ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
@@ -145,7 +163,11 @@ public class Medicines extends javax.swing.JFrame {
 
         jLabel8.setText("COMPANY");
 
-        cbCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Carrington", "Cobham", "La Fabrica", "La Masia " }));
+        cbCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCompanyActionPerformed(evt);
+            }
+        });
 
         buttonAdd.setText("ADD");
         buttonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -419,6 +441,8 @@ public class Medicines extends javax.swing.JFrame {
         tb1Model.setValueAt(expiry,tableMedicine.getSelectedRow(), 5); 
         tb1Model.setValueAt(company,tableMedicine.getSelectedRow(), 6); 
         
+        JOptionPane.showMessageDialog(this, "Medicine Updated Succesfully"); 
+        
         
         
         }
@@ -552,6 +576,8 @@ public class Medicines extends javax.swing.JFrame {
         cbExpiry.setSelectedItem("");
         cbCompany.setSelectedItem("");
         
+        JOptionPane.showMessageDialog(this, "Medicine Deleted Succesfully"); 
+        
         }
         
         else{
@@ -624,6 +650,10 @@ public class Medicines extends javax.swing.JFrame {
         PharmacyAdminLogin frm = new PharmacyAdminLogin();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCompanyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCompanyActionPerformed
 
     /**
      * @param args the command line arguments

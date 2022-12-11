@@ -253,7 +253,9 @@ public class ViewEmployee extends javax.swing.JFrame {
             employee.updateEmployees();
             tb1Model.setValueAt(id,tableEmployee.getSelectedRow(), 0);
             tb1Model.setValueAt(name,tableEmployee.getSelectedRow(), 1);
-            tb1Model.setValueAt(phone,tableEmployee.getSelectedRow(), 4);  
+            tb1Model.setValueAt(phone,tableEmployee.getSelectedRow(), 4); 
+            
+            JOptionPane.showMessageDialog(this, "Employee Updated Succesfully"); 
         }
         else{
             if(tableEmployee.getRowCount()==0){
@@ -280,6 +282,8 @@ public class ViewEmployee extends javax.swing.JFrame {
                 tfID.setText("");
                 tfName.setText("");
                 tfPhone.setText("");
+                
+                JOptionPane.showMessageDialog(this, "Employee Deleted Succesfully"); 
         }
         else{
             if(tableEmployee.getRowCount()==0){
