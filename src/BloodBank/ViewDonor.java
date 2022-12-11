@@ -8,6 +8,21 @@ package BloodBank;
  *
  * @author SHREYAS
  */
+
+
+
+import BloodBank.model.DonorModel;
+import Pharmacy.Employee;
+import Pharmacy.model.EmployeeModel;
+import hospital.model.Patient;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
 public class ViewDonor extends javax.swing.JFrame {
 
     /**
@@ -15,6 +30,36 @@ public class ViewDonor extends javax.swing.JFrame {
      */
     public ViewDonor() {
         initComponents();
+        
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM AED_Final_Project.Donor;";
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String id = Integer.toString(rs.getInt("ID"));
+                String name = rs.getString("NAME");
+                String bloodgroup = rs.getString("BLOOD_GROUP");
+                String address= rs.getString("ADDRESS");
+                String phone=rs.getString("PHONE");
+                
+                
+                String tbData[] = {id,name,bloodgroup,address,phone};
+                DefaultTableModel tb1Model = (DefaultTableModel)tableDonor.getModel();
+                
+                 tb1Model.addRow(tbData);
+                
+            }
+
+
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+        }
+        
+        
     }
 
     /**
@@ -27,136 +72,211 @@ public class ViewDonor extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tfDonorID = new javax.swing.JTextField();
-        tfName = new javax.swing.JTextField();
-        tfBloodgroup = new javax.swing.JTextField();
-        tfAddress = new javax.swing.JTextField();
-        tfPhonenumber = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableDonor = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        tfID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        tfName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        buttonUpdate = new javax.swing.JButton();
+        tfBloodgroup = new javax.swing.JTextField();
         buttonDelete = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableViewDonor = new javax.swing.JTable();
+        buttonUpdate = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tfDonorID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDonorIDActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Donor ID");
-
-        jLabel2.setText("Name");
-
-        jLabel3.setText("Blood Group");
-
-        jLabel4.setText("Address");
-
-        jLabel5.setText("Phone Number");
-
-        buttonUpdate.setText("Update");
-
-        buttonDelete.setText("Delete");
-
-        tableViewDonor.setModel(new javax.swing.table.DefaultTableModel(
+        tableDonor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Donor ID", "Name", "Blood Group", "Address", "Phone Number"
+                "ID", "NAME", "BLOOD GROUP ", "ADDRESS", "PHONE"
             }
         ));
-        jScrollPane1.setViewportView(tableViewDonor);
+        tableDonor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDonorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableDonor);
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("VIEW DONORS ");
+
+        jLabel2.setText("ID");
+
+        jLabel3.setText("NAME");
+
+        jLabel4.setText("BLOOD GROUP");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonDelete)
-                    .addComponent(buttonUpdate)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDonorID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPhonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfID)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfName)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfBloodgroup, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfDonorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfPhonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(50, 50, 50)
-                        .addComponent(buttonUpdate)
-                        .addGap(29, 29, 29)
-                        .addComponent(buttonDelete))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
+
+        buttonDelete.setText("DELETE");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
+
+        buttonUpdate.setText("UPDATE");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUpdateActionPerformed(evt);
+            }
+        });
+
+        buttonCancel.setText("CANCEL");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(402, 402, 402)
+                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfDonorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDonorIDActionPerformed
+    private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfDonorIDActionPerformed
+        
+        DefaultTableModel tb1Model = (DefaultTableModel)tableDonor.getModel();
+        if(tableDonor.getSelectedRowCount()==1){
+
+            int id = Integer.parseInt(tfID.getText());
+            String name = tfName.getText();
+            String bloodgroup = tfBloodgroup.getText();
+            
+            
+            DonorModel donors = new DonorModel(id,name,bloodgroup,"","");
+            donors.updateDonor();
+            
+            
+            tb1Model.setValueAt(id,tableDonor.getSelectedRow(), 0);
+            tb1Model.setValueAt(name,tableDonor.getSelectedRow(), 1);
+            tb1Model.setValueAt(bloodgroup,tableDonor.getSelectedRow(), 2);  
+        }
+        else{
+            if(tableDonor.getRowCount()==0){
+                JOptionPane.showMessageDialog(this, "Table is Empty");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            }
+        }
+    }//GEN-LAST:event_buttonUpdateActionPerformed
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)tableDonor.getModel();
+        if(tableDonor.getSelectedRowCount()==1){
+            int id = Integer.parseInt(tfID.getText());
+            String name = tfName.getText();
+            String bloodgroup = tfBloodgroup.getText();
+            
+            DonorModel donors = new DonorModel(id,name,bloodgroup,"","");
+            donors.updateDonor();
+                
+                tb1Model.removeRow(tableDonor.getSelectedRow());
+                tfID.setText("");
+                tfName.setText("");
+                tfBloodgroup.setText("");
+        }
+        else{
+            if(tableDonor.getRowCount()==0){
+                JOptionPane.showMessageDialog(this, "Table is Empty");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            }
+        }
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void tableDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonorMouseClicked
+        // TODO add your handling code here:
+        tfID.setText(tableDonor.getValueAt(tableDonor.getSelectedRow(), 0).toString());
+        tfName.setText(tableDonor.getValueAt(tableDonor.getSelectedRow(), 1).toString());
+        tfBloodgroup.setText(tableDonor.getValueAt(tableDonor.getSelectedRow(), 2).toString());
+    }//GEN-LAST:event_tableDonorMouseClicked
+
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        AddDonorDetails frm = new AddDonorDetails();
+        frm.setVisible(true);
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,20 +314,18 @@ public class ViewDonor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableViewDonor;
-    private javax.swing.JTextField tfAddress;
+    private javax.swing.JTable tableDonor;
     private javax.swing.JTextField tfBloodgroup;
-    private javax.swing.JTextField tfDonorID;
+    private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfPhonenumber;
     // End of variables declaration//GEN-END:variables
 }
