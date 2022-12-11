@@ -150,8 +150,13 @@ public class LoginFrame extends javax.swing.JFrame {
 
         }
         else if(role=="Admin"){
-            if(username=="admin"&&password=="admin"){
+            if(username.equals("admin")&&password.equals("admin")){
+                this.setVisible(false);
                 new AmbulanceAdmin().setVisible(true);
+            }
+            else{
+              JOptionPane.showMessageDialog(null,"Invalid Credentials");
+
             }
          }
         else{
@@ -164,6 +169,10 @@ public class LoginFrame extends javax.swing.JFrame {
                    Ambulance ambulance=new Ambulance();
                    ambulance.setDetails(username);
                    ambulance.setVisible(true);
+               }
+               else{
+                    JOptionPane.showMessageDialog(null,"Invalid Credentials");
+  
                }
            }
            catch(Exception e){

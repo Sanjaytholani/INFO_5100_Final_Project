@@ -319,27 +319,29 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
         DefaultTableModel tb1Model = (DefaultTableModel)detailsTable.getModel();
         tb1Model.setRowCount(0);
         try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/universitysystem", "root", "user@1234");
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
             java.sql.Statement statement = connection.createStatement();
-            String studentQuery = "SELECT * FROM universitysystem.crimedetails";
+            String studentQuery = "SELECT * FROM AED_Final_Project.ambulanceRequest";
             java.sql.ResultSet studentData = statement.executeQuery(studentQuery);
 
             while(studentData.next()){
                 String  name = studentData.getString("name");
                 String phone = studentData.getString("phone");
                 String address = studentData.getString("address");
-                String crimeDetails = studentData.getString("crimeDetails");
-                String officer = studentData.getString("officer");
+                String details = studentData.getString("details");
+                String officer = studentData.getString("ambulance");
                 String action = studentData.getString("action");
 
-                String tbData[] = {name, phone,address,crimeDetails,officer,action};
 
+                
+                String tbData[] = {name, phone,address,details,officer,action};
+                
                 tb1Model.addRow(tbData);
             }
-
-        }catch(Exception e){
+            
+         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
-        }
+         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
