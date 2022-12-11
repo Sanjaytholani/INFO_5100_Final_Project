@@ -6,6 +6,8 @@ package Emergency;
 
 import connection.JDBCConnection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,6 +50,9 @@ public class Ambulance extends javax.swing.JFrame {
         viewBtn = new javax.swing.JButton();
         submitBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        cbBloodgroup = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        requestBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +127,22 @@ public class Ambulance extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Ambulance");
 
+        cbBloodgroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "O", "O+" }));
+        cbBloodgroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBloodgroupActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Blood Group");
+
+        requestBtn.setText("Request Blood ");
+        requestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,7 +150,7 @@ public class Ambulance extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -137,10 +158,10 @@ public class Ambulance extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(actionTxt)
-                    .addComponent(ambulanceNoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(ambulanceNoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(cdTxt)
                     .addComponent(addressTxt)
                     .addComponent(phoneTxt)
@@ -153,8 +174,18 @@ public class Ambulance extends javax.swing.JFrame {
                 .addComponent(submitBtn)
                 .addGap(186, 186, 186))
             .addGroup(layout.createSequentialGroup()
-                .addGap(354, 354, 354)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -195,7 +226,13 @@ public class Ambulance extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addComponent(requestBtn)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -329,6 +366,31 @@ public class Ambulance extends javax.swing.JFrame {
 
     }//GEN-LAST:event_submitBtnActionPerformed
 
+    private void cbBloodgroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBloodgroupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbBloodgroupActionPerformed
+
+    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+            java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
+            String query="SELECT * from AED_Final_Project.Donor WHERE BLOOD_GROUP='"+cbBloodgroup.getSelectedItem().toString()+"'";
+             ResultSet resultset = statement.executeQuery(query);
+             if(resultset.next()){
+                 JOptionPane.showMessageDialog(rootPane, "Blood Group Available and will be provided!!");
+             }
+             else{
+                JOptionPane.showMessageDialog(rootPane, "Blood Group Not Available");
+
+             }
+        }
+        catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+                setVisible(false);
+
+            }
+    }//GEN-LAST:event_requestBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +434,7 @@ public class Ambulance extends javax.swing.JFrame {
     private javax.swing.JTextField actionTxt;
     private javax.swing.JTextField addressTxt;
     private javax.swing.JTextField ambulanceNoTxt;
+    private javax.swing.JComboBox<String> cbBloodgroup;
     private javax.swing.JTextField cdTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -380,9 +443,11 @@ public class Ambulance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField phoneTxt;
+    private javax.swing.JButton requestBtn;
     private javax.swing.JTable requestTable;
     private javax.swing.JButton submitBtn;
     private javax.swing.JButton viewBtn;
