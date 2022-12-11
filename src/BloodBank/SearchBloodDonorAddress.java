@@ -4,6 +4,11 @@
  */
 package BloodBank;
 
+import hospital.model.Patient;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SHREYAS
@@ -15,6 +20,31 @@ public class SearchBloodDonorAddress extends javax.swing.JFrame {
      */
     public SearchBloodDonorAddress() {
         initComponents();
+        try{
+            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AED_Final_Project", "root", "root@123");
+            System.out.println("connection open");
+            java.sql.Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM AED_Final_Project.donorRequest;";
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String id = Integer.toString(rs.getInt("id"));
+                String bloodgroup = rs.getString("bloodgroup");
+                String donor= rs.getString("donor");
+                String ambulance=rs.getString("ambulance");
+                
+                String tbData[] = {id,bloodgroup,donor,ambulance};
+                DefaultTableModel tb1Model = (DefaultTableModel)table.getModel();
+                
+                 tb1Model.addRow(tbData);
+                
+            }
+
+
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+        }
     }
 
     /**
@@ -28,35 +58,38 @@ public class SearchBloodDonorAddress extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableSearchblooddonoraddress = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         buttonPrint = new javax.swing.JButton();
         buttonclose = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        textBloodAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel1.setText("Search Blood Donor Address");
+        jLabel1.setText("DONOR REQUEST");
 
-        tableSearchblooddonoraddress.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Donor", "Blood Group", "Ambulance"
             }
         ));
-        jScrollPane1.setViewportView(tableSearchblooddonoraddress);
+        jScrollPane1.setViewportView(table);
 
-        buttonPrint.setText("Print");
+        buttonPrint.setText("Confirm Request");
+        buttonPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPrintActionPerformed(evt);
+            }
+        });
 
         buttonclose.setText("Close");
-
-        jLabel2.setText(" Address");
+        buttonclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttoncloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,46 +97,59 @@ public class SearchBloodDonorAddress extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(buttonPrint)
+                .addGap(78, 78, 78)
+                .addComponent(buttonPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonclose)
                 .addGap(47, 47, 47))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textBloodAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(276, 276, 276)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textBloodAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonPrint)
+                    .addComponent(buttonPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonclose))
                 .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrintActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tb1Model = (DefaultTableModel)table.getModel();
+        if(table.getSelectedRowCount()==1){
+            JOptionPane.showMessageDialog(this, "Request Processed");
+
+        }
+        else{
+            if(table.getRowCount()==0){
+                JOptionPane.showMessageDialog(this, "Table is Empty");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Select a Row");
+            }
+        }
+        
+    }//GEN-LAST:event_buttonPrintActionPerformed
+
+    private void buttoncloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoncloseActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new AddDonorDetails().setVisible(true);
+    }//GEN-LAST:event_buttoncloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,9 +190,7 @@ public class SearchBloodDonorAddress extends javax.swing.JFrame {
     private javax.swing.JButton buttonPrint;
     private javax.swing.JButton buttonclose;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableSearchblooddonoraddress;
-    private javax.swing.JTextField textBloodAddress;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
