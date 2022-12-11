@@ -104,6 +104,8 @@ public class Company extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANAGE COMPANY ");
@@ -161,6 +163,8 @@ public class Company extends javax.swing.JFrame {
             }
         });
 
+        tableCompany.setBackground(new java.awt.Color(204, 255, 204));
+        tableCompany.setForeground(new java.awt.Color(0, 0, 0));
         tableCompany.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -305,6 +309,8 @@ public class Company extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(206, Short.MAX_VALUE))
         );
+
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
 
         buttonAgent.setText("AGENTS");
         buttonAgent.addActionListener(new java.awt.event.ActionListener() {

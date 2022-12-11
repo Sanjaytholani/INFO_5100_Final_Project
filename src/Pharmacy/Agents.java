@@ -100,6 +100,8 @@ public class Agents extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel4.setBackground(new java.awt.Color(102, 255, 255));
+
         jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("MANAGE AGENTS");
@@ -146,6 +148,8 @@ public class Agents extends javax.swing.JFrame {
             }
         });
 
+        tableAgent.setBackground(new java.awt.Color(204, 255, 204));
+        tableAgent.setForeground(new java.awt.Color(0, 0, 0));
         tableAgent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -291,6 +295,8 @@ public class Agents extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(303, Short.MAX_VALUE))
         );
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
         buttonMedicine.setText("MEDICINE");
         buttonMedicine.addActionListener(new java.awt.event.ActionListener() {
