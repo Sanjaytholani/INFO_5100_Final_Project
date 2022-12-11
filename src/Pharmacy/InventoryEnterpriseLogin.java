@@ -77,6 +77,11 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
         labelRole.setText("ROLE ");
 
         cfRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "EMPLOYEE" }));
+        cfRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cfRoleActionPerformed(evt);
+            }
+        });
 
         buttonLogin.setText("LOGIN ");
         buttonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +196,7 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
                 }
             
             else if("EMPLOYEE".equals(role) && resultset.next()){
-             Employee ha = new Employee();
+             EmployeeLogin ha = new EmployeeLogin();
                 setVisible(false);
                 ha.setVisible(true);
              JOptionPane.showMessageDialog(null, "Employee Login Successful!");
@@ -210,6 +215,10 @@ public class InventoryEnterpriseLogin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_buttonLoginActionPerformed
+
+    private void cfRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cfRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cfRoleActionPerformed
 
     /**
      * @param args the command line arguments
