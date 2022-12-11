@@ -141,9 +141,9 @@
                       <Component id="cbReason" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="buttonRegister" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonView" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="buttonRegister" max="32767" attributes="0"/>
+                      <Component id="buttonView" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                   <Component id="buttonCancel" min="-2" max="-2" attributes="0"/>
@@ -244,6 +244,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonView">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Helvetica Neue" size="18" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="VIEW EMPLOYEES"/>
           </Properties>
           <Events>
