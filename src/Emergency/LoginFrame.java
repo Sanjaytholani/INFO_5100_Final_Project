@@ -149,9 +149,29 @@ public class LoginFrame extends javax.swing.JFrame {
             }
 
         }
-        else{
-                
+        else if(role=="Admin"){
+            if(username=="admin"&&password=="admin"){
+                new AmbulanceAdmin().setVisible(true);
+            }
          }
+        else{
+           try{
+               java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
+               ResultSet resultset = statement.executeQuery
+                    ("SELECT * FROM AED_Final_Project.ambulance where id ='" + username + "'");
+               if(resultset.next()){
+                   setVisible(false);
+                   Ambulance ambulance=new Ambulance();
+                   ambulance.setDetails(username);
+                   ambulance.setVisible(true);
+               }
+           }
+           catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+                setVisible(false);
+
+            } 
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
