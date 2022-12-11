@@ -72,6 +72,7 @@ public class CreateAppointmentFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(36, 37, 45));
         jPanel1.setForeground(new java.awt.Color(36, 37, 45));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Doctor");
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +81,8 @@ public class CreateAppointmentFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Creaate Appointment");
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Create Appointment");
 
         jButton1.setBackground(new java.awt.Color(218, 24, 163));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,6 +102,7 @@ public class CreateAppointmentFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Patient");
 
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {

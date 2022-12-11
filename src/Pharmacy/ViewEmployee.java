@@ -20,6 +20,24 @@ import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import java.sql.DriverManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
         
 public class ViewEmployee extends javax.swing.JFrame {
 
@@ -37,7 +55,7 @@ public class ViewEmployee extends javax.swing.JFrame {
             java.sql.ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
                 String id = Integer.toString(rs.getInt("ID"));
-                String name = rs.getString("name");
+                String name = rs.getString("NAME");
                 String age = rs.getString("AGE");
                 String password= rs.getString("PASSWORD");
                 String phone=rs.getString("PHONE");
@@ -80,6 +98,7 @@ public class ViewEmployee extends javax.swing.JFrame {
         buttonSearch = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
+        tfSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,26 +155,26 @@ public class ViewEmployee extends javax.swing.JFrame {
             }
         });
 
+        tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfSearchKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73)
-                                .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,8 +184,19 @@ public class ViewEmployee extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tfPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                                 .addGap(64, 64, 64)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(119, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                        .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(117, 117, 117)
+                                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,12 +220,15 @@ public class ViewEmployee extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -220,7 +253,9 @@ public class ViewEmployee extends javax.swing.JFrame {
             employee.updateEmployees();
             tb1Model.setValueAt(id,tableEmployee.getSelectedRow(), 0);
             tb1Model.setValueAt(name,tableEmployee.getSelectedRow(), 1);
-            tb1Model.setValueAt(phone,tableEmployee.getSelectedRow(), 4);  
+            tb1Model.setValueAt(phone,tableEmployee.getSelectedRow(), 4); 
+            
+            JOptionPane.showMessageDialog(this, "Employee Updated Succesfully"); 
         }
         else{
             if(tableEmployee.getRowCount()==0){
@@ -247,6 +282,8 @@ public class ViewEmployee extends javax.swing.JFrame {
                 tfID.setText("");
                 tfName.setText("");
                 tfPhone.setText("");
+                
+                JOptionPane.showMessageDialog(this, "Employee Deleted Succesfully"); 
         }
         else{
             if(tableEmployee.getRowCount()==0){
@@ -271,6 +308,14 @@ public class ViewEmployee extends javax.swing.JFrame {
         Employee frm = new Employee();
         frm.setVisible(true);
     }//GEN-LAST:event_buttonCancelActionPerformed
+
+    private void tfSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyPressed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)tableEmployee.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        tableEmployee.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(tfSearch.getText().trim()));
+    }//GEN-LAST:event_tfSearchKeyPressed
 
     /**
      * @param args the command line arguments
@@ -321,5 +366,6 @@ public class ViewEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPhone;
+    private javax.swing.JTextField tfSearch;
     // End of variables declaration//GEN-END:variables
 }

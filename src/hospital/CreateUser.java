@@ -54,12 +54,16 @@ public class CreateUser extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(36, 37, 45));
         jPanel1.setForeground(new java.awt.Color(36, 37, 45));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Name");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Username");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Role");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Receptionist" }));
@@ -69,6 +73,7 @@ public class CreateUser extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Create User");
 
         jButton1.setBackground(new java.awt.Color(218, 24, 163));

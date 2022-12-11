@@ -4,7 +4,10 @@
  */
 package Emergency;
 
+import connection.JDBCConnection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +34,7 @@ public class Ambulance extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        crimeTable = new javax.swing.JTable();
+        requestTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -42,28 +45,31 @@ public class Ambulance extends javax.swing.JFrame {
         phoneTxt = new javax.swing.JTextField();
         addressTxt = new javax.swing.JTextField();
         cdTxt = new javax.swing.JTextField();
-        officerTxt = new javax.swing.JTextField();
+        ambulanceNoTxt = new javax.swing.JTextField();
         actionTxt = new javax.swing.JTextField();
         viewBtn = new javax.swing.JButton();
         submitBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        cbBloodgroup = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        requestBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        crimeTable.setModel(new javax.swing.table.DefaultTableModel(
+        requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Phone", "Address", "Details"
+                "Request Id", "Name", "Phone", "Address", "Details"
             }
         ));
-        crimeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        requestTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crimeTableMouseClicked(evt);
+                requestTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(crimeTable);
+        jScrollPane1.setViewportView(requestTable);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Name");
@@ -83,17 +89,25 @@ public class Ambulance extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Action Taken");
 
+        nameTxt.setEditable(false);
+
+        phoneTxt.setEditable(false);
+
+        addressTxt.setEditable(false);
         addressTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressTxtActionPerformed(evt);
             }
         });
 
+        cdTxt.setEditable(false);
         cdTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cdTxtActionPerformed(evt);
             }
         });
+
+        ambulanceNoTxt.setEditable(false);
 
         viewBtn.setText("View Record");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +127,22 @@ public class Ambulance extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Ambulance");
 
+        cbBloodgroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "O", "O+" }));
+        cbBloodgroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBloodgroupActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Blood Group");
+
+        requestBtn.setText("Request Blood ");
+        requestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +150,7 @@ public class Ambulance extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -128,10 +158,10 @@ public class Ambulance extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(actionTxt)
-                    .addComponent(officerTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(ambulanceNoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(cdTxt)
                     .addComponent(addressTxt)
                     .addComponent(phoneTxt)
@@ -144,8 +174,18 @@ public class Ambulance extends javax.swing.JFrame {
                 .addComponent(submitBtn)
                 .addGap(186, 186, 186))
             .addGroup(layout.createSequentialGroup()
-                .addGap(354, 354, 354)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -177,7 +217,7 @@ public class Ambulance extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(officerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ambulanceNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -186,7 +226,13 @@ public class Ambulance extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbBloodgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addComponent(requestBtn)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,22 +240,22 @@ public class Ambulance extends javax.swing.JFrame {
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
-          DefaultTableModel tb1Model = (DefaultTableModel)crimeTable.getModel();
+          DefaultTableModel tb1Model = (DefaultTableModel)requestTable.getModel();
         tb1Model.setRowCount(0);
         try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/universitysystem", "root", "user@1234");
-            java.sql.Statement statement = connection.createStatement();
-            String studentQuery = "SELECT * FROM universitysystem.crimereport";
-            java.sql.ResultSet studentData = statement.executeQuery(studentQuery);
+            java.sql.Statement statement = JDBCConnection.Connect().createStatement();
+            String studentQuery = "SELECT * FROM AED_Final_Project.ambulanceRequest";
+            java.sql.ResultSet requestData = statement.executeQuery(studentQuery);
 
-            while(studentData.next()){
-                String  name = studentData.getString("name");
-                String phone = studentData.getString("phone");
-                String address = studentData.getString("address");
-                String crimeDetails = studentData.getString("crimeDetails");
+            while(requestData.next()){
+                String id=Integer.toString(requestData.getInt("id"));
+                String  name = requestData.getString("name");
+                String phone = requestData.getString("phone");
+                String address = requestData.getString("address");
+                String details = requestData.getString("details");
 
                 
-                String tbData[] = {name, phone,address,crimeDetails};
+                String tbData[] = {id,name, phone,address,details};
                 
                 tb1Model.addRow(tbData);
             }
@@ -227,67 +273,34 @@ public class Ambulance extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cdTxtActionPerformed
 
-    private void crimeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crimeTableMouseClicked
+    private void requestTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestTableMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel tb1Model = (DefaultTableModel)crimeTable.getModel();
+        DefaultTableModel tb1Model = (DefaultTableModel)requestTable.getModel();
         
-        String tb1name = tb1Model.getValueAt(crimeTable.getSelectedRow(),0).toString();
+        String tb1name = tb1Model.getValueAt(requestTable.getSelectedRow(),0).toString();
        
-        String tb1phone = tb1Model.getValueAt(crimeTable.getSelectedRow(),1).toString();
-        String tb1address = tb1Model.getValueAt(crimeTable.getSelectedRow(),2).toString();
-        String tb1cd = tb1Model.getValueAt(crimeTable.getSelectedRow(),3).toString();
-
-        
-
-       
-        
-       
+        String tb1phone = tb1Model.getValueAt(requestTable.getSelectedRow(),1).toString();
+        String tb1address = tb1Model.getValueAt(requestTable.getSelectedRow(),2).toString();
+        String tb1cd = tb1Model.getValueAt(requestTable.getSelectedRow(),3).toString();
         nameTxt.setText(tb1name);
         phoneTxt.setText(tb1phone);
         addressTxt.setText(tb1address);
-        cdTxt.setText(tb1cd);
-
-        
-    }//GEN-LAST:event_crimeTableMouseClicked
+        cdTxt.setText(tb1cd);      
+    }//GEN-LAST:event_requestTableMouseClicked
 
     
     
-    public class CrimeDetails{
         
         
-        public static void CreateCrimeDetails(String name, String phone, String address, String cd, String officer, String action){
+    public void UpdateAmbulanceRequest(String name, String phone, String address, String cd, String ambulance, String action){
             
              try{
-            java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/universitysystem", "root", "user@1234");
-            
-            System.out.println("connection open");
-            java.sql.Statement statement = connection.createStatement();
-                        System.out.println("connection open");
+            java.sql.Statement statement = JDBCConnection.Connect().createStatement();
+            int id=Integer.parseInt(requestTable.getValueAt(requestTable.getSelectedRow(), 0).toString());
+            String query="UPDATE AED_Final_Project.ambulanceRequest SET ambulance = '"+ambulanceNoTxt.getText()+"', action='"+ action +"' WHERE id ='"+id+"'";
+            statement.executeUpdate(query);
+            JOptionPane.showMessageDialog(rootPane, "Status Updated");
 
-            String query = "INSERT INTO universitysystem.crimedetails (name,phone,address,crimeDetails,officer,action) values(?,?,?,?,?,?)";
-                        System.out.println("connection insert");
-
-           // java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            java.sql.PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString(1,name);
-            
-            System.out.println("connection insert");
-            
-            preparedStmt.setString(2,phone);
-            preparedStmt.setString(3,address);
-            preparedStmt.setString(4,cd);
-            preparedStmt.setString(5,officer);
-            preparedStmt.setString(6,action);
-
-
-
-            System.out.println("connection insert");
-
-            preparedStmt.execute();
-             System.out.println("connection run");
-             JOptionPane.showMessageDialog(null,"Details Added");
-
-             connection.close();
         }
         catch(Exception e){
             System.out.println(e);
@@ -296,7 +309,6 @@ public class Ambulance extends javax.swing.JFrame {
              
         }
     
-    } 
     
     
     
@@ -304,28 +316,21 @@ public class Ambulance extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String name = nameTxt.getText();
-        
         String phone = phoneTxt.getText();
         String address = addressTxt.getText();
         String cd = cdTxt.getText();
-        String officer = officerTxt.getText();
+        String ambulance = ambulanceNoTxt.getText();
         String action = actionTxt.getText();
-
-        
-
-        
-       
-       
         
         if(addressTxt.getText().isEmpty()|| nameTxt.getText().isEmpty()||phoneTxt.getText().isEmpty()||cdTxt.getText().isEmpty()           ){
-                 JOptionPane.showMessageDialog(null, "Plz Enter Details!");
+                 JOptionPane.showMessageDialog(null, "Please Enter All Details!");
 
         
         } else{
 
         
         // Community.CreateCommunity(house,person,community,city,hospital);
-         CrimeDetails.CreateCrimeDetails(name,phone,address,cd,officer,action);
+         UpdateAmbulanceRequest(name,phone,address,cd,ambulance,action);
         }
         
 //        DefaultTableModel tb1Model = (DefaultTableModel)crimeTable.getModel();
@@ -360,6 +365,31 @@ public class Ambulance extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void cbBloodgroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBloodgroupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbBloodgroupActionPerformed
+
+    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        // TODO add your handling code here:
+        try{
+            java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
+            String query="SELECT * from AED_Final_Project.Donor WHERE BLOOD_GROUP='"+cbBloodgroup.getSelectedItem().toString()+"'";
+             ResultSet resultset = statement.executeQuery(query);
+             if(resultset.next()){
+                 JOptionPane.showMessageDialog(rootPane, "Blood Group Available and will be provided!!");
+             }
+             else{
+                JOptionPane.showMessageDialog(rootPane, "Blood Group Not Available");
+
+             }
+        }
+        catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+                setVisible(false);
+
+            }
+    }//GEN-LAST:event_requestBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,12 +426,16 @@ public class Ambulance extends javax.swing.JFrame {
             }
         });
     }
+    public void setDetails(String ambulanceNo){
+        ambulanceNoTxt.setText(ambulanceNo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actionTxt;
     private javax.swing.JTextField addressTxt;
+    private javax.swing.JTextField ambulanceNoTxt;
+    private javax.swing.JComboBox<String> cbBloodgroup;
     private javax.swing.JTextField cdTxt;
-    private javax.swing.JTable crimeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -409,10 +443,12 @@ public class Ambulance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameTxt;
-    private javax.swing.JTextField officerTxt;
     private javax.swing.JTextField phoneTxt;
+    private javax.swing.JButton requestBtn;
+    private javax.swing.JTable requestTable;
     private javax.swing.JButton submitBtn;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
