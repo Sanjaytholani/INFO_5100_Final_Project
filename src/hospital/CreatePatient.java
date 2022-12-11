@@ -56,10 +56,13 @@ public class CreatePatient extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(36, 37, 45));
         jPanel1.setForeground(new java.awt.Color(36, 37, 45));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Name");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Age");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Address");
 
         ageInput.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +71,7 @@ public class CreatePatient extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Register Patient");
 
         jButton1.setBackground(new java.awt.Color(218, 24, 163));
@@ -79,8 +83,10 @@ public class CreatePatient extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Username");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Password");
 
         jButton2.setBackground(new java.awt.Color(218, 24, 163));
