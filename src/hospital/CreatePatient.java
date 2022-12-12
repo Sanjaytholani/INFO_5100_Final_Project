@@ -16,7 +16,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import connection.JDBCConnection;
 import hospital.model.Patient;
+import java.util.Properties;
 import javax.swing.JOptionPane;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 public class CreatePatient extends javax.swing.JFrame {
 
     /**
@@ -50,6 +55,8 @@ public class CreatePatient extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         passwordInput = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        tfEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +105,14 @@ public class CreatePatient extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Email");
+
+        tfEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,15 +134,20 @@ public class CreatePatient extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(addressInput, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(passwordInput, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                    .addComponent(tfEmail)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,9 +181,13 @@ public class CreatePatient extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +203,36 @@ public class CreatePatient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void sendConfirmationEmail(String to){
+        String sender, receiver, host, sub, content;
+        sender = "aed02544@gmail.com";
+        receiver = to;
+        host = "localhost";
+        sub = "Profile Created for Hospital Registration";
+        content = "Your Profile has been successfully created, please login and book a slot for registration";
+        Properties p  = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", "587");
+        Session s = Session.getDefaultInstance(p, new javax.mail.Authenticator(){
+           protected PasswordAuthentication getPasswordAuthentication(){
+               return new PasswordAuthentication("aed02544@gmail.com", "Aedprathamesh@123");
+           } 
+        });
+        try{
+            MimeMessage m = new MimeMessage(s);
+            m.setFrom(sender);
+            m.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            m.setSubject(sub);
+            m.setText(content);
+            Transport.send(m);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String age = ageInput.getText();
@@ -187,12 +240,14 @@ public class CreatePatient extends javax.swing.JFrame {
         String name= nameInput.getText();
         String username=usernameInput.getText();
         String password=passwordInput.getText();
+        String email = tfEmail.getText();
         if(age.isEmpty()||address.isEmpty()||name.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
-            Patient patient=new Patient(name, age, username, address, password);
+            Patient patient=new Patient(name, age, username, address, password, email);
             patient.insertPatient();
+            sendConfirmationEmail(email);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -211,6 +266,10 @@ public class CreatePatient extends javax.swing.JFrame {
             new ReceptionistFrame().setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,9 +320,11 @@ public class CreatePatient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextField passwordInput;
+    private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField usernameInput;
     // End of variables declaration//GEN-END:variables
 }

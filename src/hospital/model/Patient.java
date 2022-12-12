@@ -17,13 +17,23 @@ public class Patient {
     String username;
     String address;
     String password;
-
-    public Patient(String name, String age, String username, String address, String password) {
+    String email;
+    
+    public Patient(String name, String age, String username, String address, String password, String email) {
         this.setName(name);
         this.setAddress(address);
         this.setPassword(password);
         this.setUsername(username);
         this.setAge(age);
+        this.setEmail(email);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     
@@ -71,7 +81,7 @@ public class Patient {
         try{
                 java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
 
-                statement.executeUpdate("insert into AED_Final_Project.patient" + "(name, age, address, username, password)" + "values ('"+this.getName()+"','"+this.getAge()+"','"+this.getAddress()+"','"+this.getUsername()+"','"+this.getPassword()+"')");
+                statement.executeUpdate("insert into AED_Final_Project.patient" + "(name, age, address, username, password, email)" + "values ('"+this.getName()+"','"+this.getAge()+"','"+this.getAddress()+"','"+this.getUsername()+"','"+this.getPassword()+"','"+this.getEmail()+"' )");
                 JOptionPane.showMessageDialog(null, "User successfully added!");
             }
             catch(Exception e){

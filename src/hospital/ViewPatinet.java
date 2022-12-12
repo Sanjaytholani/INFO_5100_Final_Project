@@ -226,7 +226,7 @@ public class ViewPatinet extends javax.swing.JFrame {
             String name=jTextField2.getText();
             String age=jTextField3.getText();
             String address=jTextField4.getText();
-            Patient patient= new Patient(name, age, jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), address, "");
+            Patient patient= new Patient(name, age, jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), address, "", "");
             patient.updatePatient();
             tb1Model.setValueAt(name,jTable1.getSelectedRow(), 1);
             tb1Model.setValueAt(age,jTable1.getSelectedRow(), 2);
@@ -249,7 +249,7 @@ public class ViewPatinet extends javax.swing.JFrame {
                 String name=jTextField2.getText();
                 String age=jTextField3.getText();
                 String address=jTextField4.getText();
-                Patient patient= new Patient(name, age, jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), address, "");
+                Patient patient= new Patient(name, age, jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), address, "","");
                 patient.deletePatient();
                 tb1Model.removeRow(jTable1.getSelectedRow());
                 jTextField2.setText("");
