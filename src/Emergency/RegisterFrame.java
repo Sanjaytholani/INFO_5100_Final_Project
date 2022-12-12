@@ -54,6 +54,8 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Name");
 
+        jButton2.setBackground(new java.awt.Color(204, 204, 255));
+        jButton2.setForeground(new java.awt.Color(255, 51, 51));
         jButton2.setText("Register");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +143,8 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Register");
 
+        logoutBtn.setBackground(new java.awt.Color(204, 204, 255));
+        logoutBtn.setForeground(new java.awt.Color(255, 51, 51));
         logoutBtn.setText("Back");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

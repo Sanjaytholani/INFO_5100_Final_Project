@@ -85,6 +85,8 @@ public class AmbulanceRequest extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setBackground(new java.awt.Color(204, 204, 255));
+        submitBtn.setForeground(new java.awt.Color(255, 51, 51));
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +98,8 @@ public class AmbulanceRequest extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Request Ambulance");
 
+        logoutBtn.setBackground(new java.awt.Color(204, 204, 255));
+        logoutBtn.setForeground(new java.awt.Color(255, 51, 51));
         logoutBtn.setText("Log Out");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

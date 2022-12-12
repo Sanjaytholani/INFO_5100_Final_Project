@@ -150,6 +150,8 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
             }
         });
 
+        logoutBtn.setBackground(new java.awt.Color(204, 204, 255));
+        logoutBtn.setForeground(new java.awt.Color(255, 51, 51));
         logoutBtn.setText("Log Out");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
