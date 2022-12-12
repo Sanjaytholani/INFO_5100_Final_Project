@@ -58,6 +58,7 @@ public class Ambulance extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 102));
 
+        requestTable.setBackground(new java.awt.Color(204, 255, 51));
         requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
