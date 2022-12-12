@@ -264,7 +264,7 @@ public class Medicines extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("MAIN PAGE ");
+        jButton1.setText("ADMIN MAIN PAGE ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
