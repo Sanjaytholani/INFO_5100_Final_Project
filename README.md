@@ -1,6 +1,6 @@
 # INFO_5100_Final_Project
 
-#Hospital Management System
+# Hospital Management System
 
 # We have created 4 enterprises Hospital, Blood donor, Pharmacy and Emergency
 
