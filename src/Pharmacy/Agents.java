@@ -387,8 +387,8 @@ public class Agents extends javax.swing.JFrame {
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         
-        
-        DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
+        try {
+            DefaultTableModel tb1Model = (DefaultTableModel)tableAgent.getModel();
         if(tableAgent.getSelectedRowCount()==1){
             
         int id =Integer.parseInt(tfID.getText());
@@ -397,6 +397,12 @@ public class Agents extends javax.swing.JFrame {
         String phone = tfPhone.getText();
         String password = tfPassword.getText();
         String gender = (String) cbGender.getSelectedItem().toString();
+        int ageInt=Integer.parseInt(age);
+        int phoneInt=Integer.parseInt(phone);
+        if(name.isEmpty()||password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+        }
+        else{
         
         
         AgentModel agent=new AgentModel(id,name,age,phone,password,gender);
@@ -409,7 +415,7 @@ public class Agents extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, "Agent Updated Succesfully"); 
         
-        
+        }
         }
         else{
             if(tableAgent.getRowCount()==0){
@@ -419,6 +425,14 @@ public class Agents extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Select a Row");
             } 
         }
+        
+        }
+        catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
+        
+        
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
@@ -461,14 +475,17 @@ public class Agents extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        int id =Integer.parseInt(tfID.getText());
+       try{
+         int id =Integer.parseInt(tfID.getText());
         String name = tfName.getText();
         String age = tfAge.getText();
         String phone = tfPhone.getText();
         String password = tfPassword.getText();
         String gender = (String) cbGender.getSelectedItem().toString();
-        if(name.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter Details!");
+        int ageInt=Integer.parseInt(age);
+        int phoneInt=Integer.parseInt(phone);
+        if(name.isEmpty()||password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
         }
         else{
        
@@ -483,6 +500,11 @@ public class Agents extends javax.swing.JFrame {
             
         
         }
+       }
+       catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
         
           
     }//GEN-LAST:event_buttonAddActionPerformed

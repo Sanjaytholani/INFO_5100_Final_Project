@@ -234,14 +234,17 @@ public class Employee extends javax.swing.JFrame {
 
     private void buttonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegisterActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(tfID.getText());
+       try {
+            int id = Integer.parseInt(tfID.getText());
         String name = tfName.getText();
         String age = tfAge.getText();
         String password = tfPassword.getText();
         String phone = tfPhone.getText();
         String reason = (String) cbReason.getSelectedItem().toString();
+        int ageInt=Integer.parseInt(age);
+        int phoneInt=Integer.parseInt(phone);
         
-        if(name.isEmpty()||age.isEmpty()||reason.isEmpty()){
+        if(name.isEmpty()||password.isEmpty()||reason.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
@@ -249,6 +252,11 @@ public class Employee extends javax.swing.JFrame {
             employee.insertEmployees();
             JOptionPane.showMessageDialog(this, "Employee Added Succesfully"); 
         }
+       }
+       catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
        
         
         
