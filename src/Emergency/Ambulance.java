@@ -298,11 +298,11 @@ public class Ambulance extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tb1Model = (DefaultTableModel)requestTable.getModel();
         
-        String tb1name = tb1Model.getValueAt(requestTable.getSelectedRow(),0).toString();
+        String tb1name = tb1Model.getValueAt(requestTable.getSelectedRow(),1).toString();
        
-        String tb1phone = tb1Model.getValueAt(requestTable.getSelectedRow(),1).toString();
-        String tb1address = tb1Model.getValueAt(requestTable.getSelectedRow(),2).toString();
-        String tb1cd = tb1Model.getValueAt(requestTable.getSelectedRow(),3).toString();
+        String tb1phone = tb1Model.getValueAt(requestTable.getSelectedRow(),2).toString();
+        String tb1address = tb1Model.getValueAt(requestTable.getSelectedRow(),3).toString();
+        String tb1cd = tb1Model.getValueAt(requestTable.getSelectedRow(),4).toString();
         nameTxt.setText(tb1name);
         phoneTxt.setText(tb1phone);
         addressTxt.setText(tb1address);

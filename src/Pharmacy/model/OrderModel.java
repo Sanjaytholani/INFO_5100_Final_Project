@@ -84,7 +84,6 @@ public class OrderModel {
                 java.sql.Statement statement = connection.JDBCConnection.Connect().createStatement();
 
                 statement.executeUpdate("insert into AED_Final_Project.Order" + "(id, medicine_name, quantity, production_date, expiry_date, company)" + "values ('"+this.getId()+"','"+this.getMedicine()+"', '"+this.getQuantity()+"','"+this.getProduction()+"','"+this.getExpiry()+" ', '"+this.getCompany()+"')");
-                JOptionPane.showMessageDialog(null, "User successfully added!");
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null,e.getLocalizedMessage());

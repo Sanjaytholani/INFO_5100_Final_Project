@@ -120,7 +120,6 @@ public class Medicines extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonAgent = new javax.swing.JButton();
         buttonCompany = new javax.swing.JButton();
-        buttonBook = new javax.swing.JButton();
         tfSearch = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -238,13 +237,6 @@ public class Medicines extends javax.swing.JFrame {
             }
         });
 
-        buttonBook.setText("BOOK THE MEDICINE");
-        buttonBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonBookActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -254,11 +246,7 @@ public class Medicines extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(buttonBook, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,9 +255,7 @@ public class Medicines extends javax.swing.JFrame {
                 .addComponent(buttonAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(105, 105, 105)
                 .addComponent(buttonCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118)
-                .addComponent(buttonBook, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap(469, Short.MAX_VALUE))
         );
 
         tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -634,26 +620,6 @@ public class Medicines extends javax.swing.JFrame {
         tr.setRowFilter(RowFilter.regexFilter(tfSearch.getText().trim()));
     }//GEN-LAST:event_tfSearchKeyPressed
 
-    private void buttonBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookActionPerformed
-        // TODO add your handling code here:
-        int id = Integer.parseInt(tfID.getText());
-        String medicine = tfMedicine.getText();
-        String quantity = tfQuantity.getText();
-        String production = (String) cbProduction.getSelectedItem().toString();
-        String expiry = (String) cbExpiry.getSelectedItem().toString();
-        String company = (String) cbCompany.getSelectedItem().toString();
-        
-        if(medicine.isEmpty()||quantity.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please Enter Details!");
-        }
-        else{
-            OrderModel orders = new OrderModel(id, medicine, quantity,production, expiry, company);
-            orders.insertMedicinesOrder();
-            JOptionPane.showMessageDialog(null, "Medicine Order Successful");
-            
-        }
-    }//GEN-LAST:event_buttonBookActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.hide();
@@ -703,7 +669,6 @@ public class Medicines extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAgent;
-    private javax.swing.JButton buttonBook;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonCompany;
     private javax.swing.JButton buttonDelete;
