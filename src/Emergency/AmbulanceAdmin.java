@@ -91,6 +91,7 @@ public class AmbulanceAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        ambulanceTable.setBackground(new java.awt.Color(204, 255, 204));
         ambulanceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

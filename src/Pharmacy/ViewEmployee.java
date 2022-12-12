@@ -126,6 +126,7 @@ public class ViewEmployee extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableEmployee);
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("MANAGE EMPLOYEE REGISTRATIONS ");
 
