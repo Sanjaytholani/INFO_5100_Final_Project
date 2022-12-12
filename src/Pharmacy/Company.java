@@ -380,14 +380,17 @@ public class Company extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        int id =Integer.parseInt(tfID.getText());
+      
+        try {
+              int id =Integer.parseInt(tfID.getText());
         String name = tfName.getText();
         String address = tfAddress.getText();
         String expertise = tfExpertise.getText();
         String phone = tfPhone.getText();
         String location = (String) cbLocation.getSelectedItem().toString();
         
-        if(name.isEmpty()||location.isEmpty()){
+        int phoneInt=Integer.parseInt(phone);
+        if(name.isEmpty()||location.isEmpty()|| address.isEmpty()|| expertise.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
@@ -404,6 +407,11 @@ public class Company extends javax.swing.JFrame {
         
         
         }
+        }
+        catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
         
         
         
@@ -450,7 +458,8 @@ public class Company extends javax.swing.JFrame {
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         
-        DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
+        try {
+            DefaultTableModel tb1Model = (DefaultTableModel)tableCompany.getModel();
         if(tableCompany.getSelectedRowCount()==1){
             
         int id =Integer.parseInt(tfID.getText());
@@ -460,7 +469,11 @@ public class Company extends javax.swing.JFrame {
         String phone = tfPhone.getText();
         String location = (String) cbLocation.getSelectedItem().toString();
         
-        
+        int phoneInt=Integer.parseInt(phone);
+        if(name.isEmpty()||address.isEmpty()||expertise.isEmpty()||location.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+        }
+        else{
         CompanyModel companies = new CompanyModel(id, name, address, expertise, phone, location);
         companies.updateCompanies();  
         
@@ -472,7 +485,7 @@ public class Company extends javax.swing.JFrame {
         
         
         JOptionPane.showMessageDialog(this, "Company Updated Succesfully"); 
-        
+        }
         }
         else{
             if(tableCompany.getRowCount()==0){
@@ -482,6 +495,11 @@ public class Company extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Select a Row");
             } 
         }
+        }
+         catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void tableCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCompanyMouseClicked

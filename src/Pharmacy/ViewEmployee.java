@@ -260,13 +260,20 @@ public class ViewEmployee extends javax.swing.JFrame {
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         
-        DefaultTableModel tb1Model = (DefaultTableModel)tableEmployee.getModel();
+        try {
+            DefaultTableModel tb1Model = (DefaultTableModel)tableEmployee.getModel();
         if(tableEmployee.getSelectedRowCount()==1){
 
             int id = Integer.parseInt(tfID.getText());
             String name = tfName.getText();
             String phone = tfPhone.getText();
             
+           
+          int phoneInt=Integer.parseInt(phone);
+          if(name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Details!");
+        }
+        else{
             
             EmployeeModel employee= new EmployeeModel(id, name, "", "", phone ,"");
             employee.updateEmployees();
@@ -275,6 +282,7 @@ public class ViewEmployee extends javax.swing.JFrame {
             tb1Model.setValueAt(phone,tableEmployee.getSelectedRow(), 4); 
             
             JOptionPane.showMessageDialog(this, "Employee Updated Succesfully"); 
+          }
         }
         else{
             if(tableEmployee.getRowCount()==0){
@@ -284,6 +292,12 @@ public class ViewEmployee extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Select a Row");
             }
         }
+        
+        }
+        catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed

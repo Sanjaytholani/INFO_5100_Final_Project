@@ -420,7 +420,8 @@ public class Medicines extends javax.swing.JFrame {
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         
-        DefaultTableModel tb1Model = (DefaultTableModel)tableMedicine.getModel();
+        try {
+            DefaultTableModel tb1Model = (DefaultTableModel)tableMedicine.getModel();
         if(tableMedicine.getSelectedRowCount()==1){
             
         int id =Integer.parseInt(tfID.getText());
@@ -430,6 +431,13 @@ public class Medicines extends javax.swing.JFrame {
         String production = (String) cbProduction.getSelectedItem().toString();
         String expiry = (String) cbExpiry.getSelectedItem().toString();
         String company = (String) cbCompany.getSelectedItem().toString();
+        
+        int priceInt=Integer.parseInt(price);
+        int quantityInt=Integer.parseInt(quantity);
+        if(medicine.isEmpty()||production.isEmpty()||expiry.isEmpty()||company.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Details!");
+        }
+        else{
         
         MedicineModel medicines = new MedicineModel(id, medicine, price, quantity, production, expiry, company);
         medicines.updateMedicines();  
@@ -443,7 +451,7 @@ public class Medicines extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, "Medicine Updated Succesfully"); 
         
-        
+        }
         
         }
         else{
@@ -454,6 +462,11 @@ public class Medicines extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Select a Row");
             } 
         }
+        }
+        catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
@@ -461,14 +474,18 @@ public class Medicines extends javax.swing.JFrame {
         
         
         
-        int id = Integer.parseInt(tfID.getText());
+       try {
+            int id = Integer.parseInt(tfID.getText());
         String medicine = tfMedicine.getText();
         String price = tfPrice.getText();
         String quantity = tfQuantity.getText();
         String production = (String) cbProduction.getSelectedItem().toString();
         String expiry = (String) cbExpiry.getSelectedItem().toString();
         String company = (String) cbCompany.getSelectedItem().toString();
-        if(medicine.isEmpty()||quantity.isEmpty()){
+        
+        int priceInt=Integer.parseInt(price);
+        int quantityInt=Integer.parseInt(quantity);
+        if(medicine.isEmpty()||production.isEmpty()||expiry.isEmpty()||company.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please Enter Details!");
         }
         else{
@@ -485,6 +502,11 @@ public class Medicines extends javax.swing.JFrame {
         
         
         }
+       }
+       catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
         
         
         
