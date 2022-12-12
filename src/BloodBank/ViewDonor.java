@@ -212,14 +212,18 @@ public class ViewDonor extends javax.swing.JFrame {
     private void buttonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpdateActionPerformed
         // TODO add your handling code here:
         
-        DefaultTableModel tb1Model = (DefaultTableModel)tableDonor.getModel();
+        try {
+            DefaultTableModel tb1Model = (DefaultTableModel)tableDonor.getModel();
         if(tableDonor.getSelectedRowCount()==1){
 
             int id = Integer.parseInt(tfID.getText());
             String name = tfName.getText();
             String bloodgroup = tfBloodgroup.getText();
             
-            
+            if(name.isEmpty()||bloodgroup.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+        }
+        else{
             DonorModel donors = new DonorModel(id,name,bloodgroup,"","");
             donors.updateDonor();
             
@@ -227,6 +231,7 @@ public class ViewDonor extends javax.swing.JFrame {
             tb1Model.setValueAt(id,tableDonor.getSelectedRow(), 0);
             tb1Model.setValueAt(name,tableDonor.getSelectedRow(), 1);
             tb1Model.setValueAt(bloodgroup,tableDonor.getSelectedRow(), 2);  
+        }
         }
         else{
             if(tableDonor.getRowCount()==0){
@@ -236,6 +241,11 @@ public class ViewDonor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Select a Row");
             }
         }
+        }
+         catch(Exception E){
+           JOptionPane.showMessageDialog(null, "Please Enter Valid Details!");
+
+       }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
