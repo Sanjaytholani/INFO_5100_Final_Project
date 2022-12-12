@@ -4,6 +4,13 @@
  */
 package Pharmacy;
 
+import Pharmacy.model.MedicineModel;
+import Pharmacy.model.OrderModel;
+import connection.JDBCConnection;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author prathamesh
@@ -15,6 +22,26 @@ public class Prescription extends javax.swing.JFrame {
      */
     public Prescription() {
         initComponents();
+        try{
+            java.sql.Statement statement = JDBCConnection.Connect().createStatement();
+            String sql = "SELECT * FROM AED_Final_Project.appointment";
+            java.sql.ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String doctor = rs.getString("doctor");
+                String patient = rs.getString("patient");
+                String prescription=rs.getString("prescription");
+                String id=Integer.toString(rs.getInt("id"));
+                String tbData[] = {id,doctor,patient,prescription};
+                DefaultTableModel tb1Model = (DefaultTableModel)tableBilling.getModel();
+                
+                 tb1Model.addRow(tbData);
+                
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+        }
     }
 
     /**
@@ -32,21 +59,15 @@ public class Prescription extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tableBilling.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "MEDICINE_NAME", "PRICE", "QUANTITY", "PRODUCTION_DATE", "EXPIRY_DATE", "COMPANY"
+                "ID", "Doctor", "Patient", "Prescription"
             }
         ));
         tableBilling.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -60,58 +81,51 @@ public class Prescription extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Prescription");
 
-        jButton1.setText("ADD ");
-
-        jButton2.setText("UPDATE ");
-
-        jButton3.setText("DELETE ");
-
-        jButton4.setText("SEARCH");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Check Stock and Place Order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("jLabel2");
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(49, 49, 49)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(59, 59, 59)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(48, 48, 48)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(131, 131, 131)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(399, 399, 399)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(158, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(92, 92, 92)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(50, 50, 50)
-                .addComponent(jLabel2)
-                .addContainerGap(593, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(738, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,14 +147,51 @@ public class Prescription extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableBillingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBillingMouseClicked
-        // TODO add your handling code here:
-
-
+        // TODO add your handling code here
     }//GEN-LAST:event_tableBillingMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        String prescription=tableBilling.getValueAt(tableBilling.getSelectedRow(), 3).toString();
+        int count=0;
+        try{
+            String sql = "SELECT * FROM AED_Final_Project.Medicine";
+            java.sql.ResultSet rs = JDBCConnection.Connect().createStatement().executeQuery(sql);
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                String medicine = rs.getString("MEDICINE_NAME");
+                String price = rs.getString("PRICE");
+                String quantity = rs.getString("QUANTITY");
+                String production = rs.getString("PRODUCTION_DATE");
+                String expiry = rs.getString("EXPIRY_DATE");
+                String company = rs.getString("COMPANY");
+               System.out.println(medicine+prescription);
+               if(medicine.equals(prescription)&&Integer.parseInt(quantity)>0){
+                    OrderModel orders = new OrderModel(id, medicine, "1",production, expiry, company);
+                    MedicineModel medicineModel=new MedicineModel(id, medicine,price, Integer.toString(Integer.parseInt(quantity)-1),production, expiry, company);
+                    orders.insertMedicinesOrder();
+                    medicineModel.updateMedicines();
+                    count++;
+                    JOptionPane.showMessageDialog(null, "Medicine Order Placed");
+               }
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getLocalizedMessage());
+
+        }
+        System.out.println(count);
+        if(count==0){
+                JOptionPane.showMessageDialog(null, "Medicine Stock not available");
+  
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+        new EmployeeLogin().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,10 +232,7 @@ public class Prescription extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableBilling;
